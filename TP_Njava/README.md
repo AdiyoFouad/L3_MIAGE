@@ -1,10 +1,10 @@
-# [Nom de la matière] - TPs
+# NJAVA - TPs
 
-Ce dossier contient les Travaux Pratiques de la matière **[Nom complet de la matière]** suivie en L3 MIAGE à l’ISTIC, Université de Rennes.
+Ce dossier contient les Travaux Pratiques de la matière **NJAVA** suivie en L3 MIAGE à l’ISTIC, Université de Rennes.
 
 ## 🧭 Objectif de la matière
 
-> Mise en niveau en Programmation Java.
+> Mise à niveau en Programmation Java.
 
 ## 📂 Liste des TPs
 
