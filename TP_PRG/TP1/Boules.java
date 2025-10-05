@@ -1,25 +1,38 @@
+import java.util.Scanner;
+
 public class Boules {
 
-	final static int nombreBoules = 10;
+	final static int NOMBRESBOULES = 10;
 	static char[] tableauBoules;
 	static int r = 0;
 	static int s = 0;
-	static int t = nombreBoules - 1;
-
+	static int t = NOMBRESBOULES - 1;
 
 	public static char[] lireTableaux(){
-		char[] tab = new char[Boules.nombreBoules];
-		for (int i = 0; i < 10; i++){
-			tab[i] = Lecture.lireChar();
+		char[] tab = new char[Boules.NOMBRESBOULES];
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();  // Lire la ligne complète d'un coup
+    
+    	// Vérifier que l'entrée contient bien 10 caractères (en ignorant les espaces)
+    	input = input.replaceAll("\\s", "");  // Retirer les espaces
+		// Remplir le tableau avec les caractères
+		if (input.length() != Boules.NOMBRESBOULES) {
+			System.out.println("Erreur : il faut entrer exactement " + Boules.NOMBRESBOULES + " boules.");
+			return lireTableaux();  // Relancer la méthode si l'entrée est incorrecte
+		}
+
+		for (int i = 0; i < Boules.NOMBRESBOULES; i++) {
+			tab[i] = input.charAt(i);  // Remplir le tableau avec les caractères saisis
 		}
 		return tab;
 	}
 
 	public static void ecrireTableauBoules(char[] tab){
-		for (int i = 0; i < Boules.nombreBoules; i++){
-			Ecriture.ecrireChar(tab[i]);
+		for (int i = 0; i < Boules.NOMBRESBOULES; i++){
+			System.out.print(tab[i]);  // Utilisation de System.out.print pour afficher un char
 		}
 	}
+
 	public static void echange(int i, int j, char[] tab){
 		char c = tab[i];
 		tab[i] = tab[j];
@@ -27,9 +40,9 @@ public class Boules {
 	}
 
 	public static void photo(int r, int s, int t, char[] tab){
-		Ecriture.ecrireStringln("r = " + r + " s = " + s + " t = " + t);
-		ecrireTableauBoules(tab);
-		Ecriture.ecrireStringln("");
+		System.out.println("r = " + r + " s = " + s + " t = " + t);  
+		ecrireTableauBoules(tab);  // Appel de la méthode pour afficher le tableau
+		System.out.println();  
 	}
 
 
@@ -38,7 +51,7 @@ public class Boules {
 	// r <= i < s => tab[i] == 'b'
 	// s <= i <= t => tab[i] non trié (zone à parcourir)
 	// t < i < n => tab[i] == 'r'
-	public static boolean  verify(int r, int s, int t, char[] tab){
+	public static boolean verify(int r, int s, int t, char[] tab){
 		int n = tab.length;
 		for (int i = 0; i < n; i++){
 			if (i < r ) {
@@ -56,8 +69,7 @@ public class Boules {
 
 
 	public static void main(String[] args){
-
-		Ecriture.ecrireString("Suite des " + Boules.nombreBoules + " boules : ");
+		System.out.print("Suite des " + Boules.NOMBRESBOULES + " boules : ");  
 
 		Boules.tableauBoules = Boules.lireTableaux();
 
@@ -76,19 +88,17 @@ public class Boules {
 				--Boules.t;
 				break;
 			default:
-				Ecriture.ecrireStringln("erreur : s = " + s + ", boule = " + Boules.tableauBoules[Boules.s] );
+				System.out.println("erreur : s = " + s + ", boule = " + Boules.tableauBoules[Boules.s] );  
 				++Boules.s;
 			}
 			photo(Boules.r, Boules.s, Boules.t, Boules.tableauBoules);
 		}
 
-		Ecriture.ecrireString("Résultat du tri : ");
+		System.out.print("Résultat du tri : ");  
 
 		Boules.ecrireTableauBoules(Boules.tableauBoules);
 
-		Ecriture.ecrireStringln();
-
-
+		System.out.println();  
 	}
 
 }
