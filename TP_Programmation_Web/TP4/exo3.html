@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 3</title>
+</head>
+<body>
+    <div id="result"></div>
+    <script>
+        function afficherTexte(texte) {
+            document.getElementById("result").innerHTML += "<p>" + texte + "</p>";
+        }
+
+        afficherTexte("Bonjour, ceci est un test !");
+
+        function afficherTableau(v1, v2, v3, v4) {
+        let table = "<table border=\"1\" style=\"border-collapse:collapse;text-align:center;\">";
+        table += "<tr><td>" + v1 + "</td><td>" + v2 + "</td></tr>";
+        table += "<tr><td>" + v3 + "</td><td>" + v4 + "</td></tr>";
+        table += "</table>";
+        document.getElementById("result").innerHTML += table;
+        }
+
+        afficherTableau("valeur variable 1", "valeur variable 2", "valeur variable 3", "valeur variable 4");
+    </script>
+</body>
+</html>

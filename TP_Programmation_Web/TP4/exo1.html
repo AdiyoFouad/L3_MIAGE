@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 1 : L'affichage en JavaScript</title>
+</head>
+<body>
+
+    <div id="root"></div>
+    
+<script>
+    var root = document.getElementById("root");
+
+    root.innerHTML += "Ceci est une ligne de texte";
+    root.innerHTML += "<p>Paragraph 1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laboriosam atque unde sit voluptas facilis beatae quae ex cupiditate eius ducimus dolores modi, consectetur officiis.</p>";
+    root.innerHTML += "<p>Paragraph 2: Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laboriosam atque unde sit voluptas facilis beatae quae ex cupiditate eius ducimus dolores modi, consectetur officiis.</p>";
+    root.innerHTML += "<h2>Ceci est un text en gras</h2>";
+
+    var table = document.createElement("table");
+    table.innerHTML = "<table border=1 style=\"border-collapse:collapse;text-align:center;\"><tr><td>première case</td><td>seconde case</td><td>troisième case</td></tr><tr><td>et voici</td><td>une seconde</td><td>ligne</td></tr></table>";
+    table.border = "1px";
+    root.appendChild(table);
+
+    var span = document.createElement("span");
+    span.innerText = "Ligne de texte en gras sans utiliser des balise de formatages HTML"
+    span.style.fontWeight = "bold";
+    root.appendChild(span);
+
+    //root.
+</script>
+</body>
+</html>
