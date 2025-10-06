@@ -34,7 +34,11 @@ public class InsertionInteger {
 	 * @return copie de la partie remplie du tableau
 	 */
 	public int[] toArray() {
-		return size == 0 ? new int[0] : array;
+		int[] newArray = new int[size];
+		for (int i = 0; i < size; i++) {
+			newArray[i] = array[i];
+		}
+		return newArray;
 	}
 
 	/**
