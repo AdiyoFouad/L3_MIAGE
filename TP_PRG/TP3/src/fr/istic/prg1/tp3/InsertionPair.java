@@ -36,7 +36,11 @@ public class InsertionPair {
 	 * @return copie de la partie remplie du tableau
 	 */
 	public Pair[] toArray() {
-		return null;
+		Pair[] newArray = new Pair[size];
+		for (int i = 0; i < size; i++) {
+			newArray[i] = array[i].copyOf();
+		}
+		return newArray;
 	}
 
 	/**
