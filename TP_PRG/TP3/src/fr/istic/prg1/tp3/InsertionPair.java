@@ -65,11 +65,55 @@ public class InsertionPair {
 	 *         complètement rempli; true si pair n’appartient pas à array[0..size-1]
 	 */
 	public boolean insert(Pair pair) {
-		return false;
+		int i = 0;
+		Pair[] newArray = new Pair[size + 1];
+
+		if (size == SIZE_MAX) {
+			return false;
+		}
+		
+		if (size == 0) {
+			newArray[0] = pair;
+			array = newArray;
+			size++;
+			return true;
+		}
+		
+
+		while (i < size - 1 && array[i].compareTo(pair) < 0) {
+			newArray[i] = array[i];
+			i++;
+		}
+		// lorsqu'on sort de cette boucle le prochain élément du tableau est soit le 
+		// dernier ou est celui qui doit suivre immédiatement value
+		
+		if (array[i].equals(pair)) {
+			return false;
+		} else if (0 < array[i].compareTo(pair)) {
+			// l'élément doit s'insérer entre deux éléments du tableau
+			newArray[i] = pair;
+			for (int j = i; j < size; j++) {
+				newArray[j + 1] = array[j];
+			}
+		}  else {
+			// value > array[i] : c'est que nous sommes à la fin du tableau
+			newArray[i] = array[i];
+			newArray[i + 1] = pair;
+		}
+		
+
+
+		array = newArray;
+		size++;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		StringBuilder str = new StringBuilder("");
+		for (int i = 0; i < size; i++) {
+			str.append(array[i]).append("\n");
+		}
+		return str.toString();
 	}
 }
