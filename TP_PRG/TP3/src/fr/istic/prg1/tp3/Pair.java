@@ -2,8 +2,8 @@ package fr.istic.prg1.tp3;
 
 /**
  * 
- * @author	Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr>
- * 			Fouad ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr> 
+ * @author Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr> Fouad
+ *         ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr>
  * @version 1.0
  * @since 2025-10-01
  * 
@@ -12,21 +12,32 @@ package fr.istic.prg1.tp3;
 
 public class Pair implements Comparable<Pair> {
 
+	private final int x;
+	private final int y;
+
 	public Pair(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	@Override
 	public int compareTo(Pair d) {
-		return 0;
+		if (x == d.x && y == d.y) {
+			return 0;
+		}
+		if ((x == d.x && y > d.y) || x > d.x) {
+			return 1;
+		}
+		return -1;
 	}
 
 	public Pair copyOf() {
-		return null;
+		return new Pair(x, y);
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		return "" + x + " " + y;
 	}
 
 	@Override
@@ -41,6 +52,7 @@ public class Pair implements Comparable<Pair> {
 			return false;
 		}
 		// DERNIER CAS À TRAITER
-		return false;
+		Pair pairFromObj = (Pair)obj;
+		return this.compareTo(pairFromObj) == 0;
 	}
 }
