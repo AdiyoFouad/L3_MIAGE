@@ -49,9 +49,6 @@ public class InsertionInteger {
 	 */
 	public void createArray(Scanner scanner) {
 		int c = scanner.nextInt();
-		if (c != END_MARKER) {
-			insert(c);
-		}
 		while (c != END_MARKER) {
 			insert(c);
 			c = scanner.nextInt();

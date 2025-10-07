@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 /**
  * 
- * @author	Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr>
- * 			Fouad ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr> 
+ * @author Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr> Fouad
+ *         ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr>
  * @version 1.0
  * @since 2025-10-01
  * 
@@ -50,6 +50,16 @@ public class InsertionPair {
 	 * @param scanner
 	 */
 	public void createArray(Scanner scanner) {
+
+		int x = scanner.nextInt();
+		int y = scanner.nextInt();
+		while (x != END_MARKER && y != END_MARKER) {
+			insert(new Pair(x, y));
+			x = scanner.nextInt();
+			//y = scanner.nextInt();
+			y = x != -1 ? scanner.nextInt() : END_MARKER;
+
+		}
 	}
 
 	/**
@@ -67,26 +77,24 @@ public class InsertionPair {
 	public boolean insert(Pair pair) {
 		int i = 0;
 		Pair[] newArray = new Pair[size + 1];
-
 		if (size == SIZE_MAX) {
 			return false;
 		}
-		
+
 		if (size == 0) {
 			newArray[0] = pair;
 			array = newArray;
 			size++;
 			return true;
 		}
-		
 
 		while (i < size - 1 && array[i].compareTo(pair) < 0) {
 			newArray[i] = array[i];
 			i++;
 		}
-		// lorsqu'on sort de cette boucle le prochain élément du tableau est soit le 
+		// lorsqu'on sort de cette boucle le prochain élément du tableau est soit le
 		// dernier ou est celui qui doit suivre immédiatement value
-		
+
 		if (array[i].equals(pair)) {
 			return false;
 		} else if (0 < array[i].compareTo(pair)) {
@@ -95,13 +103,11 @@ public class InsertionPair {
 			for (int j = i; j < size; j++) {
 				newArray[j + 1] = array[j];
 			}
-		}  else {
+		} else {
 			// value > array[i] : c'est que nous sommes à la fin du tableau
 			newArray[i] = array[i];
 			newArray[i + 1] = pair;
 		}
-		
-
 
 		array = newArray;
 		size++;
@@ -112,8 +118,25 @@ public class InsertionPair {
 	public String toString() {
 		StringBuilder str = new StringBuilder("");
 		for (int i = 0; i < size; i++) {
-			str.append(array[i]).append("\n");
+			str.append(array[i].toString()).append("\n");
 		}
+		System.out.println(str.toString());
 		return str.toString();
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Entrer une suite d'entiers positif terminée par -1 : ");
+		Scanner scanner = new Scanner(System.in);
+		InsertionPair ourArray = new InsertionPair();
+		int x = scanner.nextInt();
+		int y = scanner.nextInt();
+		while (x != END_MARKER && y != END_MARKER) {
+			ourArray.insert(new Pair(x, y));
+			x = scanner.nextInt();
+			//y = scanner.nextInt();
+			y = x != -1 ? scanner.nextInt() : END_MARKER;
+
+		}
+		System.out.println(ourArray);
 	}
 }
