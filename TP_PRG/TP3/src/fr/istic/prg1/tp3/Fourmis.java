@@ -54,6 +54,12 @@ public class Fourmis {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(next("13112221"));
+		String terme = "1";
+		System.out.println("Les dix premiers termes de la suite des formis");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("u"+i+ " : "+terme);
+			terme = next(terme);
+		}
+		
 	}
 }
