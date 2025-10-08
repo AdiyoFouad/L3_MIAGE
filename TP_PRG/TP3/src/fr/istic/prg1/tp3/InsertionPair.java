@@ -120,23 +120,6 @@ public class InsertionPair {
 		for (int i = 0; i < size; i++) {
 			str.append(array[i].toString()).append("\n");
 		}
-		System.out.println(str.toString());
 		return str.toString();
-	}
-
-	public static void main(String[] args) {
-		System.out.println("Entrer une suite d'entiers positif terminée par -1 : ");
-		Scanner scanner = new Scanner(System.in);
-		InsertionPair ourArray = new InsertionPair();
-		int x = scanner.nextInt();
-		int y = scanner.nextInt();
-		while (x != END_MARKER && y != END_MARKER) {
-			ourArray.insert(new Pair(x, y));
-			x = scanner.nextInt();
-			//y = scanner.nextInt();
-			y = x != -1 ? scanner.nextInt() : END_MARKER;
-
-		}
-		System.out.println(ourArray);
 	}
 }
