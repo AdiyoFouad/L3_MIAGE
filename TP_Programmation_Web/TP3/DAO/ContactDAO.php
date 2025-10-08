@@ -1,11 +1,12 @@
 <?php 
 
 require_once "../models/ContactModel.php";
+require_once "../config/config.php";
 
 class ContactDAO {
     private PDO $pdo;
-    public function __construct(PDO $pdo) {
-        $this->pdo = $pdo;
+    public function __construct(PDO $npdo = $cpdo) {
+        $this->pdo = $npdo;
     }
 
     public function getContacts() : array{
@@ -19,6 +20,7 @@ class ContactDAO {
 
     public function getById(int $id) : ContactModel {
         $stmt = $this->pdo->prepare("SELECT * FROM contacts WHERE id = ?");
+        $stmt->execute(array($id));
         $row = $stmt->fetch();
         return new ContactModel($row['id'], $row['nom'], $row['prenom'], $row['email'], $row['telephone']);
     }

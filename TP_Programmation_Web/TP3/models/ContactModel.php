@@ -3,7 +3,9 @@
 class ContactModel {
 
     //mettre le contactDAO comme un objet static de la classe et l'utilisé à chaque fois. Du coup pas besoin de le passer en parramètre
-
+    
+    private static $contactDAO = new ContactDAO();
+    
     private int $id;
     private string $nom;
     private string $prenom;
@@ -13,16 +15,22 @@ class ContactModel {
         $this->id = $id;
         $this->nom = $nNom;
         $this->prenom = $nPrenom;
-        $this->nEmail = $nEmail;
-        $this->nTelephone = $nTelephone;
+        $this->email = $nEmail;
+        $this->telephone = $nTelephone;
     }
     
-    public static function getContact(ContactDAO $contactDAO, int $id): ContactModel {
-        return $contactDAO->getById($id);
+    public static function getContact(int $id): ContactModel {
+        return ContactModel::$contactDAO->getById($id);
     } 
 
-    public function add(ContactDAO $contactDAO) {
-        $contactDAO->addContact($this);
+    public function add() {
+        ContactModel::$contactDAO->addContact($this);
+    }
+    public function update(ContactDAO $contactDAO) {
+        ContactModel::$contactDAO->editContact($this);
+    }
+    public function delete(ContactDAO $contactDAO) {
+        ContactModel::$contactDAO->deleteContact($this->id);
     }
 
     public function getId(): string {
