@@ -28,12 +28,12 @@ class ContactModel {
         $contactDAO = new ContactDAO($pdo);
         $contactDAO->addContact($this);
     }
-    public function update(ContactDAO $contactDAO) {
+    public function update() {
         global $pdo;
         $contactDAO = new ContactDAO($pdo);
         $contactDAO->editContact($this);
     }
-    public function delete(ContactDAO $contactDAO) {
+    public function delete() {
         global $pdo;
         $contactDAO = new ContactDAO($pdo);
         $contactDAO->deleteContact($this->id);
