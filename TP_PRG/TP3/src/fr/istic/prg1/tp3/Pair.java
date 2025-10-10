@@ -2,8 +2,8 @@ package fr.istic.prg1.tp3;
 
 /**
  * 
- * @author Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr> Fouad
- *         ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr>
+ * @author 	Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr> 
+ * 			Fouad ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr>
  * @version 1.0
  * @since 2025-10-01
  * 

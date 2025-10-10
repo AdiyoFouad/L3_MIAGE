@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 /**
  * 
- * @author Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr> Fouad
+ * @author Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr> 
+ * Fouad
  *         ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr>
  * @version 1.0
  * @since 2025-10-01
