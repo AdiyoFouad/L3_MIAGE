@@ -1,11 +1,9 @@
 <?php 
 
-class ContactModel {
+    require_once '../config/config.php';
+    require_once '../DAO/ContactDAO.php';
 
-    //mettre le contactDAO comme un objet static de la classe et l'utilisé à chaque fois. Du coup pas besoin de le passer en parramètre
-    
-    private static $contactDAO = new ContactDAO();
-    
+class ContactModel {
     private int $id;
     private string $nom;
     private string $prenom;
@@ -20,17 +18,25 @@ class ContactModel {
     }
     
     public static function getContact(int $id): ContactModel {
-        return ContactModel::$contactDAO->getById($id);
+        global $pdo;
+        $contactDAO = new ContactDAO($pdo);
+        return $contactDAO->getById($id);
     } 
 
     public function add() {
-        ContactModel::$contactDAO->addContact($this);
+        global $pdo;
+        $contactDAO = new ContactDAO($pdo);
+        $contactDAO->addContact($this);
     }
     public function update(ContactDAO $contactDAO) {
-        ContactModel::$contactDAO->editContact($this);
+        global $pdo;
+        $contactDAO = new ContactDAO($pdo);
+        $contactDAO->editContact($this);
     }
     public function delete(ContactDAO $contactDAO) {
-        ContactModel::$contactDAO->deleteContact($this->id);
+        global $pdo;
+        $contactDAO = new ContactDAO($pdo);
+        $contactDAO->deleteContact($this->id);
     }
 
     public function getId(): string {

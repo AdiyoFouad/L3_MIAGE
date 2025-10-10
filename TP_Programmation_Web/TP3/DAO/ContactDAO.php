@@ -5,7 +5,7 @@ require_once "../config/config.php";
 
 class ContactDAO {
     private PDO $pdo;
-    public function __construct(PDO $npdo = $cpdo) {
+    public function __construct(PDO $npdo) {
         $this->pdo = $npdo;
     }
 
