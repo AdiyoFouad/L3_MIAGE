@@ -1,7 +1,7 @@
 <?php 
 
-    require_once '../config/config.php';
-    require_once '../DAO/ContactDAO.php';
+    require_once ("./config/config.php");
+    require_once ("./DAO/ContactDAO.php");
 
 class ContactModel {
     private int $id;

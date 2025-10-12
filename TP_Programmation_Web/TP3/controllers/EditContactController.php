@@ -1,8 +1,8 @@
 <?php
 
-    require_once '../models/ContactModel.php';
-    require_once '../config/config.php';
-    require_once '../DAO/ContactDAO.php';
+    require_once ("./models/ContactModel.php");
+    require_once ("./config/config.php");
+    require_once ("./DAO/ContactDAO.php");
     class EditContactController {
         public function editContact() {
             if (isset($_POST['id']) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["email"]) && isset($_POST["telephone"])) {
@@ -14,7 +14,7 @@
 
         public function showForm() {
             // Affichage du formulaire
-            require '../views/edit_contact.php';
+            require './views/edit_contact.php';
         }
     }
     

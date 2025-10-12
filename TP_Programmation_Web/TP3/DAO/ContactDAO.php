@@ -1,7 +1,7 @@
 <?php 
 
-require_once "../models/ContactModel.php";
-require_once "../config/config.php";
+require_once "./models/ContactModel.php";
+require_once "./config/config.php";
 
 class ContactDAO {
     private PDO $pdo;

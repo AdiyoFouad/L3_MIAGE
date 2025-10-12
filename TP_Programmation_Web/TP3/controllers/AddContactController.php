@@ -1,6 +1,6 @@
 <?php
 
-    require_once '../models/ContactModel.php';
+    require_once ("./models/ContactModel.php");
 
     class AddContactController {
         public function addContact() { 
@@ -13,7 +13,7 @@
 
         public function showForm() {
             // Affichage du formulaire
-            require '../views/add_contact.php';
+            require './views/add_contact.php';
         }
     }
 ?>

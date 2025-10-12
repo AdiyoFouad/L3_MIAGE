@@ -1,8 +1,8 @@
 <?php
 
-    require_once '../models/ContactModel.php';
-    require_once '../config/config.php';
-    require_once '../DAO/ContactDAO.php';
+    require_once ("./models/ContactModel.php");
+    require_once ("./config/config.php");
+    require_once ("./DAO/ContactDAO.php");
     class DeleteContactController {
         public function deleteContact() {
             if (isset($_POST['id'])) {
@@ -16,7 +16,7 @@
         public function showConfirmation() {
             if (isset($_GET['id'])) {
                 $contactId = $_GET["id"];
-                require '../views/edit_contact.php';
+                require './views/edit_contact.php';
             }
         }
 
