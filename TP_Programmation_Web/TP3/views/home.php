@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des contacts</title>
-    <link rel="stylesheet" href="./css/styles.css"> 
+    <link rel="stylesheet" href="public/css/styles.css"> 
 </head>
 <body>
     <h1>Liste des contacts</h1>
