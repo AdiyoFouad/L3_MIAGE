@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du contact</title>
-    <link rel="stylesheet" href="/tp3/public/css/styles.css"> <!-- Adapte si nécessaire -->
+    <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
 
@@ -23,6 +23,9 @@
             <a href="index.php?action=delete&id=<?= $contact->getId() ?>" class="btn btn-delete" onclick="return confirm('Supprimer ce contact ?');">Supprimer</a>
             <a href="index.php?action=home" class="btn">Retour à la liste</a>
         </div>
+    <?php else : ?>
+        <p>Contact introuvable.</p>
+        <a href="index.php?action=home" class="btn">Retour à la liste</a>
     <?php endif; ?>
 
 </body>
