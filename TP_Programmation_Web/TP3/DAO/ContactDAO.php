@@ -19,11 +19,14 @@ class ContactDAO {
         return $contacts;
     }
 
-    public function getById(int $id) : ContactModel {
+    public function getById(int $id) : ?ContactModel {
         $stmt = $this->pdo->prepare("SELECT * FROM contacts WHERE id = ?");
         $stmt->execute(array($id));
         $row = $stmt->fetch();
-        return new ContactModel($row['id'], $row['nom'], $row['prenom'], $row['email'], $row['telephone']);
+        if ($row) {
+            return new ContactModel($row['id'], $row['nom'], $row['prenom'], $row['email'], $row['telephone']);
+        }
+        return null;
     }
 
     public function addContact(ContactModel $contact) : void{
