@@ -3,7 +3,7 @@
     require_once '../models/ContactModel.php';
     require_once '../config/config.php';
     require_once '../DAO/ContactDAO.php';
-    class EditContactController {
+    class DeleteContactController {
         public function deleteContact() {
             if (isset($_POST['id'])) {
                 global $pdo;
