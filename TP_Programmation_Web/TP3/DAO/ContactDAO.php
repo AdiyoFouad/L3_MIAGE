@@ -11,6 +11,7 @@ class ContactDAO {
 
     public function getContacts() : array{
         $stmt = $this->pdo->prepare("SELECT * FROM contacts");
+        $stmt->execute();
         $contacts = [];
         while ($row = $stmt->fetch()) {
             $contacts[] = new ContactModel($row['id'], $row['nom'], $row['prenom'], $row['email'], $row['telephone']);

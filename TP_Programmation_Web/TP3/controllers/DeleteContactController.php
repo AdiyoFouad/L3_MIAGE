@@ -5,20 +5,14 @@
     require_once ("./DAO/ContactDAO.php");
     class DeleteContactController {
         public function deleteContact() {
-            if (isset($_POST['id'])) {
+            if (isset($_GET['id'])) {
                 global $pdo;
                 $contactDAO = new ContactDAO($pdo);
-                $contactDAO->deleteContact($_POST['id']);
+                $contactDAO->deleteContact($_GET['id']);
                 header("Location: index.php");
             }
         }
 
-        public function showConfirmation() {
-            if (isset($_GET['id'])) {
-                $contactId = $_GET["id"];
-                require './views/edit_contact.php';
-            }
-        }
 
     }
     

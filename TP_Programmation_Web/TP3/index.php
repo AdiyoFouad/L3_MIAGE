@@ -1,17 +1,6 @@
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $_GET['action']; ?></title>
-</head>
-<body>
-    
-</body>
-</html>
 <?php
-// index.php (Point d'entrée)
+
 
 require_once 'controllers/HomeController.php';
 require_once 'controllers/AddContactController.php';
@@ -53,12 +42,7 @@ switch ($action) {
 
     case 'delete':
         $controller = new DeleteContactController();
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $controller->deleteContact(); 
-        } else {
-            $controller->showConfirmation(); 
-        }
-        break;
+        $controller->deleteContact(); 
 
     default:
         echo "Action inconnue!";
