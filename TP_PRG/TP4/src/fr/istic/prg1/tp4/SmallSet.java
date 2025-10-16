@@ -3,9 +3,9 @@ package fr.istic.prg1.tp4;
 import java.util.Arrays;
 
 /**
- * @author Mickaël Foursov <foursov@univ-rennes1.fr>
- * @version 5.0
- * @since 2022-09-23
+ * @author Fouad ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr>
+ * @version 1.0
+ * @since 2025-15-10
  */
 
 public class SmallSet {
@@ -34,8 +34,13 @@ public class SmallSet {
 	 * @return nombre de valeurs appartenant à l’ensemble
 	 */
 	public int size() {
-		// TODO
-		return 0;
+		int size = 0;
+		for (int i = 0; i < SET_SIZE; ++i) {
+			if (tab[i]) {
+				size++;
+			}
+		}
+		return size;
 	}
 
 	/**
@@ -43,16 +48,14 @@ public class SmallSet {
 	 * @return true, si l’entier x appartient à l’ensemble, false sinon
 	 */
 	public boolean contains(int x) {
-		// TODO
-		return false;
+		return tab[x];
 	}
 
 	/**
 	 * @return true, si l’ensemble est vide, false sinon
 	 */
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return size() == 0;
 	}
 
 	/**
@@ -62,7 +65,7 @@ public class SmallSet {
 	 * @pre 0 <= x <= 255
 	 */
 	public void add(int x) {
-		// TODO
+		tab[x] = true;
 	}
 
 	/**
@@ -72,7 +75,7 @@ public class SmallSet {
 	 * @pre 0 <= x <= 255
 	 */
 	public void remove(int x) {
-		// TODO
+		tab[x] = false;
 	}
 
 	/**
@@ -83,7 +86,9 @@ public class SmallSet {
 	 * @pre 0 <= begin <= end <= 255
 	 */
 	public void addInterval(int deb, int fin) {
-		// TODO
+		for (int i = deb; i <= fin; ++i) {
+			tab[i] = true;
+		}
 	}
 
 	/**
@@ -94,7 +99,9 @@ public class SmallSet {
 	 * @pre 0 <= begin <= end <= 255
 	 */
 	public void removeInterval(int deb, int fin) {
-		// TODO
+		for (int i = deb; i <= fin; ++i) {
+			tab[i] = false;
+		}
 	}
 
 	/**
@@ -103,7 +110,9 @@ public class SmallSet {
 	 * @param set2 deuxième ensemble
 	 */
 	public void union(SmallSet set2) {
-		// TODO
+		for (int i = 0; i < SET_SIZE; ++i) {
+			tab[i] = tab[i] || set2.tab[i];
+		}
 	}
 
 	/**
@@ -112,7 +121,9 @@ public class SmallSet {
 	 * @param set2 deuxième ensemble
 	 */
 	public void intersection(SmallSet set2) {
-		// TODO
+		for (int i = 0; i < SET_SIZE; ++i) {
+			tab[i] = tab[i] && (tab[i] && set2.tab[i]);
+		}
 	}
 
 	/**
@@ -121,7 +132,9 @@ public class SmallSet {
 	 * @param set2 deuxième ensemble
 	 */
 	public void difference(SmallSet set2) {
-		// TODO
+		for (int i = 0; i < SET_SIZE; ++i) {
+			tab[i] = tab[i] && !set2.tab[i];
+		}
 	}
 
 	/**
@@ -130,21 +143,27 @@ public class SmallSet {
 	 * @param set2 deuxième ensemble
 	 */
 	public void symmetricDifference(SmallSet set2) {
-		// TODO
+		for (int i = 0; i < SET_SIZE; ++i) {
+			tab[i] = (tab[i] && !set2.tab[i]) || (!tab[i] && set2.tab[i]);
+		}
 	}
 
 	/**
 	 * this devient le complément de this.
 	 */
 	public void complement() {
-		// TODO
+		for (int i = 0; i < SET_SIZE; ++i) {
+			tab[i] = !tab[i];
+		}
 	}
 
 	/**
 	 * this devient l'ensemble vide.
 	 */
 	public void clear() {
-		// TODO
+		for (int i = 0; i < SET_SIZE; ++i) {
+			tab[i] = false;
+		}
 	}
 
 	/**
@@ -152,7 +171,10 @@ public class SmallSet {
 	 * @return true, si this est inclus dans set2, false sinon
 	 */
 	public boolean isIncludedIn(SmallSet set2) {
-		return false;
+		for (int i = 0; i < SET_SIZE; ++i) {
+			tab[i] = false;
+		}
+		return true;
 	}
 
 	@Override
