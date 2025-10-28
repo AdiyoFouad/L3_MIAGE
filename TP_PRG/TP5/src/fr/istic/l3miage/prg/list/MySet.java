@@ -90,11 +90,17 @@ public class MySet extends List<SubSet> {
 	 */
 
 	public boolean containsValue(int value) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		int rank = value / 256;
+		int val = value % 256;
+		
+		Iterator<SubSet> it = this.iterator();
+		
+		while(it.getValue().rank < rank) {
+			it.goForward();
+		}
+		if(it.getValue().rank == rank) {
+			return it.getValue().set.contains(val);
+		}
 		return false;
 	}
 
@@ -114,6 +120,9 @@ public class MySet extends List<SubSet> {
 	 * @param is flux d'entrée.
 	 */
 	public void addAllFromStream(InputStream is) {
+		Scanner sc = new Scanner(is);
+		
+		
 		System.out.println("------------------------------------------");
 		System.out.println("------------------------------------------");
 		System.out.println("---------- fonction à écrire -------------");
@@ -127,11 +136,21 @@ public class MySet extends List<SubSet> {
 	 * @param element valuer à ajouter.
 	 */
 	public void addNumber(int value) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		int rank = value / 256;
+		int val = value % 256;
+		
+		Iterator<SubSet> it = this.iterator();
+		
+		while(it.getValue().rank < rank) {
+			it.goForward();
+		}
+		if(it.getValue().rank == rank) {
+			it.getValue().set.add(val);
+		} else {
+			SmallSet set = new SmallSet();
+			set.add(val);
+			it.addLeft(new SubSet(rank, set));
+		}
 	}
 
 	/**
