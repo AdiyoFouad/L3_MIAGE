@@ -227,11 +227,36 @@ public class MySet extends List<SubSet> {
 	 * @param set2 deuxième ensemble
 	 */
 	public void difference(MySet set2) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		
+		
+		Iterator<SubSet> it = this.iterator();
+		Iterator<SubSet> it2 = set2.copyOf().iterator();
+		//copyOf car si on passe l'object lui meme à la fonction it2 et it pointe
+		// vers le même truc ce qui fait que testDifference7 ne passe pas sans ça
+		
+		while(!it.isOnFlag()) {
+			SubSet s = it.getValue();
+			SubSet s2 = it2.getValue();
+			
+			if(it2.isOnFlag()) {
+				break;
+			}
+			
+			if (s.rank == s2.rank) {
+				s.set.difference(s2.set);
+
+				if(s.set.isEmpty()) {
+					it.remove();
+				} else {
+					it.goForward();
+				}
+				it2.goForward();
+			} else if (s.rank < s2.rank) {
+				it.goForward();
+			} else if (s.rank > s2.rank){
+				it2.goForward();
+			}
+		}
 	}
 
 	/**
@@ -292,12 +317,29 @@ public class MySet extends List<SubSet> {
 		} else if (!(o instanceof MySet)) {
 			b = false;
 		} else {
-			System.out.println("------------------------------------------");
-			System.out.println("------------------------------------------");
-			System.out.println("---------- fonction à écrire -------------");
-			System.out.println("------------------------------------------");
-			System.out.println("------------------------------------------");
-			b = false;
+			MySet set2 = (MySet) o;
+			
+			Iterator<SubSet> it = this.iterator();
+			Iterator<SubSet> it2 = set2.iterator();
+			
+			while(!it.isOnFlag()) {
+				SubSet s = it.getValue();
+				SubSet s2 = it2.getValue();
+				if (s.rank == s2.rank) {
+					if (s.set.equals(s2.set)) {
+						it.goForward();
+						it2.goForward();
+					} else {
+						return false;
+					}
+				}else {
+					return false;
+				}
+			}
+			if(!it2.isOnFlag()) {
+				return false;
+			}
+			
 		}
 		return b;
 	}

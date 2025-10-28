@@ -214,11 +214,8 @@ public class TestMySet {
 	@Test
 	public void testRemoval1() {
 		MySet mySet1 = readFileToMySet(ENS0);
-		mySet1.print();
 		mySet1.removeNumber(64);
-		mySet1.print();
 		mySet1.removeNumber(32767);
-		mySet1.print();
 		MySet mySet2 = readFileToMySet(DIR + "test-d05.ens");
 		assertTrue("deletion sparsity 1", testSparsity(mySet1));
 		assertTrue("deletion 1", compareMySets(mySet1, mySet2));
