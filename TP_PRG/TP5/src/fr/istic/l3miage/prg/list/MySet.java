@@ -173,11 +173,12 @@ public class MySet extends List<SubSet> {
 	 * @param is flux d'entrée
 	 */
 	public void removeAllFromStream(InputStream is) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		Scanner sc = new Scanner(is);
+		int value;
+		while ((value = sc.nextInt()) != -1) {
+			//System.out.println(value);
+			removeNumber(value);
+		}
 	}
 
 	/**
@@ -186,11 +187,17 @@ public class MySet extends List<SubSet> {
 	 * @param element valeur à supprimer
 	 */
 	public void removeNumber(int value) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		int rank = value / 256;
+		int val = value % 256;
+		
+		Iterator<SubSet> it = this.iterator();
+		
+		while(it.getValue().rank < rank) {
+			it.goForward();
+		}
+		if(it.getValue().rank == rank) {
+			it.getValue().set.remove(val);
+		}
 	}
 
 	/**
