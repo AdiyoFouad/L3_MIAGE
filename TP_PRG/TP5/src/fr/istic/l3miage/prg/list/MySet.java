@@ -195,8 +195,12 @@ public class MySet extends List<SubSet> {
 		while(it.getValue().rank < rank) {
 			it.goForward();
 		}
-		if(it.getValue().rank == rank) {
-			it.getValue().set.remove(val);
+		SubSet s = it.getValue();
+		if(s.rank == rank) {
+			s.set.remove(val);
+			if(s.set.isEmpty()) {
+				it.remove();
+			}
 		}
 	}
 
