@@ -151,6 +151,7 @@ public class TestMySet {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		//set.print();
 		return set;
 	}
 

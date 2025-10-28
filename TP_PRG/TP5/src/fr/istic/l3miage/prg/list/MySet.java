@@ -65,8 +65,14 @@ public class MySet extends List<SubSet> {
 	 * d’écran.
 	 */
 	public void print() {
-		System.out.println(" [version corrigee de contenu]");
-		this.print(System.out);
+		Iterator<SubSet> it = this.iterator();
+
+		while(!it.isOnFlag()) {
+			System.out.println(it.getValue());
+			it.goForward();
+		}
+		//System.out.println(" [version corrigee de contenu]");
+		//this.print(System.out);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
@@ -121,13 +127,11 @@ public class MySet extends List<SubSet> {
 	 */
 	public void addAllFromStream(InputStream is) {
 		Scanner sc = new Scanner(is);
-		
-		
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		int value;
+		while ((value = sc.nextInt()) != -1) {
+			//System.out.println(value);
+			addNumber(value);
+		}
 	}
 
 	/**
@@ -146,7 +150,7 @@ public class MySet extends List<SubSet> {
 		}
 		if(it.getValue().rank == rank) {
 			it.getValue().set.add(val);
-		} else {
+		} else if(it.getValue().rank > rank){
 			SmallSet set = new SmallSet();
 			set.add(val);
 			it.addLeft(new SubSet(rank, set));
@@ -193,12 +197,13 @@ public class MySet extends List<SubSet> {
 	 * @return taille de l'ensemble this
 	 */
 	public int size() {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		return -1;
+		int s = 0;
+		Iterator<SubSet> it = this.iterator();
+		while(!it.isOnFlag()) {
+			s += it.getValue().set.size();
+			it.goForward();
+		}
+		return s;
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////
