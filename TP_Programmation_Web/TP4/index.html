@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>TP JS</title>
+		<meta name="description" content>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			table {
+				border-collapse: collapse;
+				border: 2px solid rgb(140 140 140);
+				font-family: sans-serif;
+				font-size: 0.8rem;
+				letter-spacing: 1px;
+			}
+			th,td {
+				border: 1px solid rgb(160 160 160);
+				padding: 8px 10px;
+				}	
+		</style>
+	</head>
+	<body>
+		<div>Exercice 1 <br>
+			<script >
+			var paraph = "<p> premier paragraphe <br> TP JavaScript<br></p> ";
+			var ligneGras = "<b>Ligne de text en gras</b>";
+			var tableau = "<table> <tr> <td >première case </td> <td >deuxième case</td><td>troisième case</td><tr><td>et voici</td><td>est une</td><td>troisième ligne</td> </tr></tbody> </table>";
+			var chaine = "une chaine de caractère";
+			document.writeln(paraph);
+			document.writeln(ligneGras);
+			document.writeln(tableau);
+			document.writeln(chaine.bold());			
+		</script>
+		</div>
+		<div>Exercice 2:<br>
+			<script>
+				var varnum = 1;
+				var varChaine = "une chaine";
+				var varChaineNum = "une chaine et :" + 1;
+				var tableau = "<table> <tr> <td >" + varnum + " </td> <td >" + varChaine + "</td><td>"  + varChaineNum + "</td> </table>";
+				document.writeln(varnum, ", ", varChaine, ", ",varChaineNum);
+				document.writeln(tableau);
+			</script>
+		</div>
+		<div> Exercice 3 :<br>
+			<script>
+				
+				function affiche(i){
+					document.writeln(i);
+
+				}
+				function afficheInTab(var1, var2,var3,var4){
+					document.writeln("<table> <tr> <td >" + var1 + " </td> <td >" + var2 + " </td> <td >" + var3 + "</td><td>"  + var4 + "</td></table>");
+				}
+				affiche("hello World");
+				afficheInTab("valeur variable 1", "valeur variable 2", "valeur variable 3", "valeur variable 4");
+			</script>
+		</div>
+		<div> Exercice 4 :<br>
+			<input type="submit" onclick="boiteAlerte(text)"
+				value="Voici l'execice 4"><br>
+
+			<img src="un_chat.jpeg" onmouseover="boiteAlerte(text)">
+			<script>
+				var text = "Bravo vous avez réussi";
+				function boiteAlerte(param){
+					window.alert(param);
+				}
+
+			</script>
+		</div>
+		<div> Exercice 5 :<br>
+
+			<script>
+				function structure(param){
+					if(param<10){
+						document.writetln("infèrieur a 10<br>");
+					}else{
+						document.writeln("supérieur à 10<br>");
+					}
+				}
+				structure(15);
+				function itt(max){
+					for (let pas = 0; pas <= max; pas++) {
+						if(pas == 10){
+							document.writeln(pas);
+						}else{
+							document.writeln(pas," - ");
+						}
+						
+					}
+				}
+				itt(10);
+				document.writeln("<br>")
+				function tab(max){
+					for (let i = 0; i <= max; i++) {
+						document.writeln("| ");
+						for(let j =0; j<= max; j++){
+							document.writeln(" ",i," - ", j, " ");
+						}
+						document.writeln(" |<br>");
+						
+					}
+				}
+				tab(10);
+
+			</script>
+		</div>
+		<div> Exercice 6 :<br>
+			<p>Copie du champs </p> 
+			<form>
+				<input type="text" id="src_champs" oninput="copierChamp('src_champs', 'copie')">
+				<input type="text" id="copie">
+			</form>
+			<p>Selection de pays : </p>
+			 <select id="pays" onchange="afficherCapitale()">
+				<option value="">-- Sélectionnez un pays --</option>
+				<option value="France">France</option>
+				<option value="Allemagne">Allemagne</option>
+				<option value="Espagne">Espagne</option>
+				<option value="Italie">Italie</option>
+			</select>
+    		<input type="text" id="capitale" readonly>
+			<p> Exercice 7 :</p>
+			<a href="" onmouseover="fermer()">Passez la souris ici pour fermer la fenêtre</a>
+			<script>
+				function copierChamp(src_champs, copie) {
+					const source = document.getElementById(src_champs);
+					const destination = document.getElementById(copie);
+					destination.value = source.value;
+				};
+			
+				const capitales = {
+					"France": "Paris",
+					"Allemagne": "Berlin",
+					"Espagne": "Madrid",
+					"Italie": "Rome"
+				};
+
+				function afficherCapitale() {
+					const paysSelect = document.getElementById("pays");
+					const capitaleInput = document.getElementById("capitale");
+					capitaleInput.value = capitales[paysSelect.value] || "";
+				};
+				function fermer(){
+					window.close();
+				};
+ 
+			</script>
+		</div>
+	</body>
+</html>

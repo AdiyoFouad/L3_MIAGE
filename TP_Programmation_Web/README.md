@@ -15,6 +15,7 @@ d’une application client/serveur.
 |----|----------------|
 | TP1 - TP2 | Classe PHP & Micro-site Login (Formulaire + MySQL) | 
 | TP3 | Création d'une application de gestions de contacts en utilisant le pattern MVC et DAO en PHP Objet |
+| TP4 | JavaScript |
 
 ## 🛠️ Technologies / Langages
 

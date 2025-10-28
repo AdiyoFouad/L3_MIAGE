@@ -7,3 +7,8 @@
 - **Exercice 5:** Structure du Langage
 - **Exercice 6:** Formulaires
 - **Exercice 7:** Les fenêtres
+
+## Auteurs
+
+- **Fouad ODJOUOYE <fouad.odjouoye@etudiant.univ-rennes1.fr>**
+- **Perrine BOISSY <perrine.boissy@etudiant.univ-rennes1.fr>**
