@@ -265,11 +265,33 @@ public class MySet extends List<SubSet> {
 	 * @param set2 deuxième ensemble
 	 */
 	public void symmetricDifference(MySet set2) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		/* ---- testSymmetricDifference1 ne passe pas : j'ai complexité égale à 20 or il faut 15 ou 16 max*/
+		Iterator<SubSet> it = this.iterator();
+		Iterator<SubSet> it2 = set2.copyOf().iterator();
+		//copyOf car si on passe l'object lui meme à la fonction it2 et it pointe
+		// vers le même truc ce qui fait que testDifference7 ne passe pas sans ça
+		
+		while(!it2.isOnFlag()) {
+			SubSet s = it.getValue();
+			SubSet s2 = it2.getValue();
+			
+			if (s.rank < s2.rank) {
+				it.goForward();
+			} else if (s.rank > s2.rank) {
+				it.addLeft(it2.getValue().copyOf());
+				it.goForward();
+				it2.goForward();
+			} else {
+				s.set.symmetricDifference(s2.set);
+
+				if(s.set.isEmpty()) {
+					it.remove();
+				} else {
+					it.goForward();
+				}
+				it2.goForward();
+			} 
+		}
 	}
 
 	/**
@@ -301,6 +323,7 @@ public class MySet extends List<SubSet> {
 			} 
 		}
 		
+		
 	}
 
 	/**
@@ -312,7 +335,7 @@ public class MySet extends List<SubSet> {
 		Iterator<SubSet> it = this.iterator();
 		Iterator<SubSet> it2 = set2.iterator();
 		
-		while(!it.isOnFlag()) {
+		while(!it2.isOnFlag()) {
 			SubSet s = it.getValue();
 			SubSet s2 = it2.getValue();
 			
@@ -324,13 +347,9 @@ public class MySet extends List<SubSet> {
 				it.goForward();
 			} else if (s.rank > s2.rank){
 				it.addLeft(it2.getValue().copyOf());
+				it.goForward();
 				it2.goForward();
 			}
-		}
-		while(!it2.isOnFlag()) {
-			it.addLeft(it2.getValue().copyOf());
-			it.goForward();
-			it2.goForward();
 		}
 	}
 
