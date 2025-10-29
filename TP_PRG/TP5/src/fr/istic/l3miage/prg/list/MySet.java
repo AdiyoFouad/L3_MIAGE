@@ -385,12 +385,31 @@ public class MySet extends List<SubSet> {
 	 * @return true si this est inclus dans set2, false sinon
 	 */
 	public boolean isIncludedIn(MySet set2) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		return false;
+		Iterator<SubSet> it = this.iterator();
+		Iterator<SubSet> it2 = set2.iterator();
+		
+		while(!it.isOnFlag()) {
+			SubSet s = it.getValue();
+			SubSet s2 = it2.getValue();
+			if (s.rank == s2.rank) {
+				if (s.set.isIncludedIn(s2.set)) {
+					it.goForward();
+					it2.goForward();
+				} else {
+					return false;
+				}
+			} else if (s.rank > s2.rank) {
+				it2.goForward();
+			} else if (s.rank < s2.rank){
+//				s2.rank ne doit jamais être supérieur à s.rank dans le parcours
+//				car les deux tableaux sont triés. si this est inclu dans set2
+//				c'est qu'on moment on avance it2 à un moment forcément il 
+//				tombera sur s.rank - s'il dépasse s.rank c'est qu'il n'a pas 
+//				cette valeur de rank.
+				return false;
+			}
+		}
+		return true;
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////
