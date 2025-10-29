@@ -291,11 +291,29 @@ public class MySet extends List<SubSet> {
 	 * @param set2 deuxième ensemble
 	 */
 	public void union(MySet set2) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+		Iterator<SubSet> it = this.iterator();
+		Iterator<SubSet> it2 = set2.iterator();
+		
+		while(!it.isOnFlag()) {
+			SubSet s = it.getValue();
+			SubSet s2 = it2.getValue();
+			
+			if (s.rank == s2.rank) {
+				s.set.union(s2.set);
+				it.goForward();
+				it2.goForward();
+			} else if (s.rank < s2.rank) {
+				it.goForward();
+			} else if (s.rank > s2.rank){
+				it.addLeft(it2.getValue().copyOf());
+				it2.goForward();
+			}
+		}
+		while(!it2.isOnFlag()) {
+			it.addLeft(it2.getValue().copyOf());
+			it.goForward();
+			it2.goForward();
+		}
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////
