@@ -278,11 +278,29 @@ public class MySet extends List<SubSet> {
 	 * @param set2 deuxième ensemble
 	 */
 	public void intersection(MySet set2) {
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
-		System.out.println("---------- fonction à écrire -------------");
-		System.out.println("------------------------------------------");
-		System.out.println("------------------------------------------");
+
+		Iterator<SubSet> it = this.iterator();
+		Iterator<SubSet> it2 = set2.iterator();
+		
+		while(!it.isOnFlag()) {
+			SubSet s = it.getValue();
+			SubSet s2 = it2.getValue();
+			
+			if (s.rank == s2.rank) {
+				s.set.intersection(s2.set);
+				if(s.set.isEmpty()) {
+					it.remove();
+				} else {
+					it.goForward();
+				}
+				it2.goForward();
+			} else if (s.rank < s2.rank) {
+				it.remove();
+			} else if (s.rank > s2.rank){
+				it2.goForward();
+			} 
+		}
+		
 	}
 
 	/**
