@@ -265,7 +265,6 @@ public class MySet extends List<SubSet> {
 	 * @param set2 deuxième ensemble
 	 */
 	public void symmetricDifference(MySet set2) {
-		/* ---- testSymmetricDifference1 ne passe pas : j'ai complexité égale à 20 or il faut 15 ou 16 max*/
 		Iterator<SubSet> it = this.iterator();
 		Iterator<SubSet> it2 = set2.copyOf().iterator();
 		//copyOf car si on passe l'object lui meme à la fonction it2 et it pointe
