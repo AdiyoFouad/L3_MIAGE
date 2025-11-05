@@ -58,11 +58,11 @@ public class TpListe {
 			menu.setVisible(false);
 			execute(actionNumber);
 			menu.setVisible(true);
-			System.out.println("------------------------------------------");
+			/*System.out.println("------------------------------------------");
 			System.out.println("------------------------------------------");
 			System.out.println("---------- fonction à écrire -------------");
 			System.out.println("------------------------------------------");
-			System.out.println("------------------------------------------");
+			System.out.println("------------------------------------------");*/
 
 		
 		}
