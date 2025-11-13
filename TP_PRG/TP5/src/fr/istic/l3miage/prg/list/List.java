@@ -46,50 +46,79 @@ public class List<T extends SuperT<T>> {
 		 * @see List::iterator()
 		 */
 		private ListIterator() {
+			this.current = List.this.flag.right;	
 		}
 
 		@Override
 		public void goForward() {
+			current = current.right; 
 		}
 
 		@Override
 		public void goBackward() {
+			current = current.left;
 		}
 
 		@Override
 		public void restart() {
+			current = List.this.flag.right;
 		}
 
 		@Override
 		public boolean isOnFlag() {
-			return false;
+			return current == List.this.flag;
 		}
 
 		@Override
 		public void remove() {
 			assert current != flag : "impossible de retirer le drapeau";
+			current.left.right = current.right;
+			current.right.left = current.left;
+			current = current.right;
 		}
 
 		@Override
 		public T getValue() {
-			return null;
+			return current.value;
 		}
 
 		@Override
 		public T nextValue() {
-			return null;
+			return current.right.value;
 		}
 
 		@Override
 		public void addLeft(T value) {
+			Element newElement = new Element();
+			
+			newElement.value = value;
+			newElement.left = current.left;
+			newElement.right = current;
+			
+			current.left.right = newElement;
+			current.left = newElement;
+			
+			current = newElement;
+			
 		}
 
 		@Override
 		public void addRight(T value) {
+			Element newElement = new Element();
+			
+			newElement.value = value;
+			newElement.left = current;
+			newElement.right = current.right;
+			
+			current.right.left = newElement;
+			current.right = newElement;
+			
+			current = newElement;
 		}
 
 		@Override
 		public void setValue(T value) {
+			current.value = value;
 		}
 
 		@Override
@@ -108,6 +137,9 @@ public class List<T extends SuperT<T>> {
 	 * Instancie une liste vide (contenant seulement le drapeau).
 	 */
 	public List() {
+		flag = new Element();
+		flag.left = flag;
+		flag.right = flag;
 	}
 
 	/**
@@ -115,20 +147,22 @@ public class List<T extends SuperT<T>> {
 	 *         positionnÃ© sur lâ€™Ã©lÃ©ment de tÃªte.
 	 */
 	public ListIterator iterator() {
-		return null;
+		return new ListIterator();
 	}
 
 	/**
 	 * @return true si la liste est vide, false sinon
 	 */
 	public boolean isEmpty() {
-		return false;
+		return flag.right == flag;
 	}
 
 	/**
 	 * Supprimer toutes les valeurs de la liste.
 	 */
 	public void clear() {
+		flag.left = flag;
+		flag.right = flag;
 	}
 
 	/**
@@ -137,6 +171,7 @@ public class List<T extends SuperT<T>> {
 	 * @param v valeur Ã  mettre dans le drapeau.
 	 */
 	public void setFlag(T v) {
+		flag.value = v;
 	}
 
 	/**
@@ -145,6 +180,14 @@ public class List<T extends SuperT<T>> {
 	 * @param v valeur Ã  ajouter
 	 */
 	public void addHead(T v) {
+		Element head = new Element();
+		head.value = v;
+		head.left = flag;
+		head.right = flag.right.right;
+		
+		flag.right.left = head;
+		flag.right = head;
+		
 	}
 
 	/**
@@ -153,6 +196,13 @@ public class List<T extends SuperT<T>> {
 	 * @param v valeur Ã  ajouter
 	 */
 	public void addTail(T v) {
+		Element tail = new Element();
+		tail.value = v;
+		tail.right = flag;
+		tail.left = flag.left;
+		
+		flag.left.right = tail;
+		flag.left = tail;
 	}
 
 	/**

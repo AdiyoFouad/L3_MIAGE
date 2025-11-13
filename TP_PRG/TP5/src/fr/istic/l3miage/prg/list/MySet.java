@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import fr.istic.l3miage.prg.list_util.Comparison;
 import fr.istic.l3miage.prg.list_util.Iterator;
-import fr.istic.l3miage.prg.list_util.List;
+//import fr.istic.l3miage.prg.list_util.List;
 import fr.istic.l3miage.prg.list_util.SmallSet;
 
 /**
