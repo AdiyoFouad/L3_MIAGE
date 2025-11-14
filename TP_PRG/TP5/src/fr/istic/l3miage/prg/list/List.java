@@ -6,8 +6,8 @@ import fr.istic.l3miage.prg.list_util.SuperT;
 /**
  * Liste en double chaÃ®nage par rÃ©fÃ©rences
  * 
- * @author MickaÃ«l Foursov
- * @author Vincent Drevelle
+ * @author ODJOUOYE Fouad <fouad.odjouoye@etudiant.univ-rennes.fr>
+ * @version 1.0
  * 
  *         Version corrigÃ©e et instrumentÃ©e (compte du nombre d'opÃ©rations).
  *         Utilise un versionnage pour empÃªcher les modifs concurrentes.

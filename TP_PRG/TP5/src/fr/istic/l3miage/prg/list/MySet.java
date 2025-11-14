@@ -15,9 +15,9 @@ import fr.istic.l3miage.prg.list_util.Iterator;
 import fr.istic.l3miage.prg.list_util.SmallSet;
 
 /**
- * @author Mickaël Foursov <foursov@univ-rennes.fr>
- * @version 4.1
- * @since 2023-10-11
+ * @author ODJOUOYE Fouad <fouad.odjouoye@etudiant.univ-rennes.fr>
+ * @version 1.0
+ * @since 2025-10-24
  */
 
 public class MySet extends List<SubSet> {
