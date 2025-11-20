@@ -1,5 +1,6 @@
 {
     "require": {
-        "symfony/expression-language": "^6.4"
+        "symfony/expression-language": "^6.4",
+        "symfony/twig-bundle": "^6.4"
     }
 }
