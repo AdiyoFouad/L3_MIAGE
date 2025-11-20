@@ -3,12 +3,14 @@ package fr.istic.l3miage.prg.tree;
 import java.util.Scanner;
 
 import fr.istic.l3miage.prg.tree_util.AbstractImage;
+import fr.istic.l3miage.prg.tree_util.Iterator;
+import fr.istic.l3miage.prg.tree_util.Node;
 
 
 /**
  * @author Mickaël Foursov <foursov@univ-rennes1.fr>
  * @version 5.0
- * @since 2023-09-23
+ * @since 2025-11-20
  * 
  *        Classe décrivant les images en noir et blanc de 256 sur 256 pixels
  *        sous forme d'arbres binaires.
@@ -191,12 +193,50 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public boolean isPixelOn(int x, int y) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
-		return false;
+	    int profondeur = 0;
+	    int minH = 0;
+	    int maxH = 256;
+	    int minW = 0;
+	    int maxW = 256;
+
+
+	    Iterator<Node> it = this.iterator();
+
+	    while (it.getValue() == Node.TWO) {
+	        if (profondeur % 2 == 0) { //profondeur impaire on divise les y (découpage horizontale)
+	            int medianeH = (minH + maxH) / 2;
+	            if (y < medianeH) {
+	            	maxH = medianeH;
+	                it.goLeft();
+	            } else {
+	            	minH = medianeH + 1;
+	                it.goRight();
+	            }
+	        } else { //profondeur paire on divise les x (découpage verticale)
+	        	int medianeW = (minW + maxW) / 2;
+	            if (x < medianeW) {
+	            	maxW = medianeW;
+	                it.goLeft();
+	            } else {
+	            	minW = medianeW + 1;
+	                it.goRight();
+	            }
+	        }
+	    	
+	        /*
+	        System.out.println("Ittération : " + profondeur);
+	        System.out.println("NodeType: " + it.getValue());
+	        System.out.println("Width : [ " +  + minW + " ; " + maxW + " ]");
+	        System.out.println("Height : [ " + minH + " ; " + maxH + " ]");
+	        System.out.println("X : " + x);
+	        System.out.println("Y : " + y);
+	        System.out.println("");
+	        
+	        */
+	        profondeur++;
+	    }
+
+	    return it.getValue() == Node.ONE;
 	}
 
 	/**
