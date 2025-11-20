@@ -8,7 +8,7 @@ import fr.istic.l3miage.prg.tree_util.Node;
 
 
 /**
- * @author Mickaël Foursov <foursov@univ-rennes1.fr>
+ * @author ODJOUOYE Fouad <fouad.odjouoye@etudiant.univ-rennes1.fr>
  * @version 5.0
  * @since 2025-11-20
  * 
@@ -37,11 +37,31 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void affect(AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
+		if (this == image2) return;
+		Iterator<Node> it = this.iterator();
+		it.clear();
+		affectAux(it, image2.iterator());
+	}
+	
+	public void affectAux(Iterator<Node> itThis, Iterator<Node> itImage) {
+		
+		if(itImage.getValue() == Node.TWO) {
+			itThis.addValue(itImage.getValue());
+			
+			itThis.goLeft();
+			itImage.goLeft();
+			affectAux(itThis, itImage);
+			itImage.goUp();
+			itThis.goUp();
+			
+			itThis.goRight();
+			itImage.goRight();
+			affectAux(itThis, itImage);
+			itImage.goUp();
+			itThis.goUp();	
+		} else {
+			itThis.addValue(itImage.getValue());
+		}
 	}
 
 	/**
