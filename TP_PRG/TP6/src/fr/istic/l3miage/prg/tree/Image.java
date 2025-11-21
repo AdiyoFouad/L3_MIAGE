@@ -45,8 +45,9 @@ public class Image extends AbstractImage {
 	
 	public void affectAux(Iterator<Node> itThis, Iterator<Node> itImage) {
 		
+		itThis.addValue(itImage.getValue());
+		
 		if(itImage.getValue() == Node.TWO) {
-			itThis.addValue(itImage.getValue());
 			
 			itThis.goLeft();
 			itImage.goLeft();
@@ -59,8 +60,6 @@ public class Image extends AbstractImage {
 			affectAux(itThis, itImage);
 			itImage.goUp();
 			itThis.goUp();	
-		} else {
-			itThis.addValue(itImage.getValue());
 		}
 	}
 
@@ -197,13 +196,96 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public boolean testDiagonal() {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
-		return false;
+		Iterator<Node> it = this.iterator();
+		
+		if (it.getValue() == Node.TWO) {
+			it.goLeft();
+			boolean g = auxDiagonal(it, 0, 1);
+			//System.out.println(g);
+			if(!g) return false;
+			it.goRoot();
+			it.goRight();
+			boolean d = auxDiagonal(it, 1, 1);
+			//System.out.println(d);
+			return d && g;
+		} else {
+			return it.getValue() == Node.ONE;
+		}
 	}
+	
+
+	public boolean auxDiagonal(Iterator<Node> it, int direction, int profondeur) {
+		
+		// direction vaut 0 on fait un parcours de l'arbre gauche et un parcours de l'arbre droit si direction vaut 1
+		// profondeur nous permet de savoir si il faut parcour tous les deux sous-abres ou juste celui en fnc de la direction
+		
+		//System.out.println("Profondeur : " + (profondeur == 0 ? "pair" : "impaire") + " et " + (direction == 0 ? "gauche" : "droite"));
+		if (it.getValue() == Node.TWO) {
+			//System.out.println("noeud: " + it.getValue());
+			if (profondeur == 1) {
+				if (direction == 0) {
+					it.goLeft();
+					//System.out.println("left: " + it.getValue());
+				} else {
+					it.goRight();
+					//System.out.println("rigth:" + it.getValue());
+				}
+				return auxDiagonal(it, direction, (profondeur + 1) % 2);	
+			} else {
+				it.goLeft();
+				//System.out.println("left: " + it.getValue());
+				boolean g = auxDiagonal(it, 0, (profondeur + 1) % 2);
+				it.goUp();
+				
+				if(!g) return false; // plus besoin de faire la partie droite
+				
+				it.goRight();
+				//System.out.println("rigth:" +it.getValue());
+				boolean d = auxDiagonal(it, 1, (profondeur + 1) % 2);
+				it.goUp();
+				
+				return g && d;
+			}
+			
+		} else {
+			return it.getValue() == Node.ONE;
+		}
+	}
+	/*
+	public boolean testDiagonalv0() {
+		Iterator<Node> itG = this.iterator();
+		Iterator<Node> itD = this.iterator();
+		
+		if (itG.getValue() == Node.TWO) {
+			itG.goLeft();
+			boolean g = auxDiagonal(itG, 0);
+			System.out.println(g);
+			
+			itD.goRight();
+			boolean d = auxDiagonal(itD, 1);
+			System.out.println(d);
+			return d && g;
+		} else {
+			return itD.getValue() == Node.ONE;
+		}
+		
+	}
+	
+	public boolean auxDiagonalv0(Iterator<Node> it, int dir) {
+		
+		System.out.println(it.getValue());
+		if (it.getValue() == Node.TWO) {
+			if (dir == 0) {
+				it.goLeft();
+			} else {
+				it.goRight();
+			}
+			return auxDiagonal(it, dir);
+		} else {
+			return it.getValue() == Node.ONE;
+		}
+	}
+	*/
 
 	/**
 	 * @param x abscisse du point
