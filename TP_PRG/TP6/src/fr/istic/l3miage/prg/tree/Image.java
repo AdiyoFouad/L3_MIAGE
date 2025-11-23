@@ -181,11 +181,88 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void union(AbstractImage image1, AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
+		Iterator<Node> it = this.iterator();
+		Iterator<Node> it1 = image1.iterator();
+		Iterator<Node> it2 = image2.iterator();
+		it.clear();
+		auxUnion(it, it1, it2);
+	}
+	
+	
+	
+	public Node auxUnion(Iterator<Node> it, Iterator<Node> it1, Iterator<Node> it2) {
+		
+		Node node1 = it1.getValue();
+		Node node2 = it2.getValue();
+		
+		
+
+		//System.out.println("Node 1 :" + node1);
+		//System.out.println("Node 2 :" + node2);
+		if (node1 == Node.ONE || node2 == Node.ONE) {
+			it.addValue(Node.ONE);
+			return  Node.ONE;
+		} 
+		
+		if (node1 == Node.ZERO && node2 == Node.ZERO) {
+			it.addValue(Node.ZERO);
+			return Node.ZERO;
+		}
+		
+		//L'un au moins des deux noeuds est TWO on doit descendre
+		
+		//it.setValue(Node.TWO);
+		
+		//it.goLeft();
+		
+		it.addValue(Node.TWO);
+		
+		it.goLeft();
+		if (node1 == Node.TWO) it1.goLeft();
+		if (node2 == Node.TWO) it2.goLeft();
+		Node n = auxUnion( it, it1, it2);
+		it.goUp();
+		if (node1 == Node.TWO) it1.goUp();
+		if (node2 == Node.TWO) it2.goUp();
+		
+		it.goRight();
+		if (node1 == Node.TWO) it1.goRight();
+		if (node2 == Node.TWO) it2.goRight();
+		Node w = auxUnion( it, it1, it2);
+		it.goUp();
+		if (node1 == Node.TWO) it1.goUp();
+		if (node2 == Node.TWO) it2.goUp();
+		
+		/*
+		if (node1 == Node.TWO && node2 == Node.ZERO) {
+			affectAux(it, it1);
+		} else if (node2 == Node.TWO && node1 == Node.ZERO) {
+			affectAux(it, it2);
+		} else if (node1 == Node.TWO && node2 == Node.TWO) {
+			it.addValue(Node.TWO);
+			
+			it.goLeft();
+			it1.goLeft();
+			it2.goLeft();
+			Node n = auxUnion( it, it1, it2);
+			it.goUp();
+			it1.goUp();
+			it2.goUp();
+			
+			it.goRight();
+			it1.goRight();
+			it2.goRight();
+			Node w = auxUnion( it, it1, it2);
+			it.goUp();
+			it1.goUp();
+			it2.goUp();
+			
+		}*/
+		
+		return Node.TWO;
+		
+		
+		
 	}
 
 	/**
