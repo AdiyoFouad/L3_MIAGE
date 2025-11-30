@@ -71,11 +71,29 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void rotate180(AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
+		Iterator<Node> it = this.iterator();
+		it.clear();
+		auxRotate180(it, image2.iterator());
+	}
+	public void auxRotate180(Iterator<Node> itThis,Iterator<Node> itImage) {
+		Node current = itImage.getValue();
+		itThis.addValue(current);
+		
+		if (current == Node.TWO) {
+			itThis.goRight();
+			itImage.goLeft();
+			auxRotate180(itThis, itImage);
+			itThis.goUp();
+			itImage.goUp();
+
+			itThis.goLeft();
+			itImage.goRight();
+			auxRotate180(itThis, itImage);
+			itThis.goUp();
+			itImage.goUp();
+		}
+		
+		
 	}
 
 	/**
