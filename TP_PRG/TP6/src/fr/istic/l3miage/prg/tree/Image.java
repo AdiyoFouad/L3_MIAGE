@@ -608,11 +608,34 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public boolean isIncludedIn(AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
-		return false;
+		return auxIsIncludedIn(this.iterator(), image2.iterator());
+	}
+	
+	public boolean auxIsIncludedIn(Iterator<Node> itThis, Iterator<Node> itImage) {
+		Node currentThis = itThis.getValue();
+		Node currentImage = itImage.getValue();
+		
+		if (currentThis == Node.ZERO || currentImage == Node.ONE) {
+			return true;
+		} else if (currentThis != currentImage) {
+			return false;
+		} else { // Les deux sont égals à 2
+			itThis.goLeft();
+			itImage.goLeft();
+			boolean resultatG = auxIsIncludedIn(itThis, itImage);
+			itThis.goUp();
+			itImage.goUp();
+			
+			if (!resultatG) return false;
+			
+			itThis.goRight();
+			itImage.goRight();
+			boolean resultatD = auxIsIncludedIn(itThis, itImage);
+			itThis.goUp();
+			itImage.goUp();
+			
+			return resultatD;
+		}
+		
 	}
 }
