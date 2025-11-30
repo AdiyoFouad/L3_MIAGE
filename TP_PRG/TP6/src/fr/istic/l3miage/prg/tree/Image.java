@@ -188,8 +188,6 @@ public class Image extends AbstractImage {
 		auxUnion(it, it1, it2);
 	}
 	
-	
-	
 	public Node auxUnion(Iterator<Node> it, Iterator<Node> it1, Iterator<Node> it2) {
 		
 		Node node1 = it1.getValue();
@@ -220,7 +218,9 @@ public class Image extends AbstractImage {
 		it.goLeft();
 		if (node1 == Node.TWO) it1.goLeft();
 		if (node2 == Node.TWO) it2.goLeft();
-		Node n = auxUnion( it, it1, it2);
+		auxUnion( it, it1, it2);
+
+		Node resultatG = it.getValue();
 		it.goUp();
 		if (node1 == Node.TWO) it1.goUp();
 		if (node2 == Node.TWO) it2.goUp();
@@ -228,10 +228,21 @@ public class Image extends AbstractImage {
 		it.goRight();
 		if (node1 == Node.TWO) it1.goRight();
 		if (node2 == Node.TWO) it2.goRight();
-		Node w = auxUnion( it, it1, it2);
+		auxUnion( it, it1, it2);
+		Node w = it.getValue();
 		it.goUp();
 		if (node1 == Node.TWO) it1.goUp();
 		if (node2 == Node.TWO) it2.goUp();
+		
+		//Gestion du cas où l'union donne une zone uniforme = pas besoin de diviser la zone
+		if (resultatG == w && resultatG != Node.TWO) {
+			it.goLeft();
+			it.remove();
+			it.goUp();
+			it.remove();
+			it.setValue(w);
+			System.out.println("Un boss " + resultatG);
+		}
 		
 		/*
 		if (node1 == Node.TWO && node2 == Node.ZERO) {
