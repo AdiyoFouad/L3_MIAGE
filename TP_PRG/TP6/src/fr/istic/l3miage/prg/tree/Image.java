@@ -85,11 +85,24 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void videoInverse() {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println(); 
+		auxVideoInverse(this.iterator()); 
+	}
+	
+	public void auxVideoInverse(Iterator<Node> it) {
+		Node current = it.getValue();
+		if (current == Node.TWO) {
+			
+			it.goLeft();
+			auxVideoInverse(it);
+			it.goUp();
+			
+			it.goRight();
+			auxVideoInverse(it);
+			it.goUp();
+			
+		} else {
+			it.setValue(current == Node.ONE ? Node.ZERO : Node.ONE);
+		}
 	}
 
 	/**
