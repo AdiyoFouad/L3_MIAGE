@@ -113,11 +113,45 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void mirrorV(AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
+		Iterator<Node> it = this.iterator();
+		it.clear();
+		auxMirrorV(it, image2.iterator(), 0);
+	}
+	
+	public void auxMirrorV(Iterator<Node> itThis, Iterator<Node> itImage, int profondeur) {
+		Node current = itImage.getValue();
+		itThis.addValue(current);
+		
+		if (current == Node.TWO) {
+			if ( profondeur % 2 == 1) {
+				itThis.goLeft();
+				itImage.goLeft();
+				auxMirrorV(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+				
+
+				itThis.goRight();
+				itImage.goRight();
+				auxMirrorV(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+			} else {
+
+				itThis.goRight();
+				itImage.goLeft();
+				auxMirrorV(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+				
+
+				itThis.goLeft();
+				itImage.goRight();
+				auxMirrorV(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+			}
+		}
 	}
 
 	/**
@@ -128,11 +162,45 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void mirrorH(AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
+		Iterator<Node> it = this.iterator();
+		it.clear();
+		auxMirrorH(it, image2.iterator(), 0);
+	}
+	
+	public void auxMirrorH(Iterator<Node> itThis, Iterator<Node> itImage, int profondeur) {
+		Node current = itImage.getValue();
+		itThis.addValue(current);
+		
+		if (current == Node.TWO) {
+			if ( profondeur % 2 == 0) {
+				itThis.goLeft();
+				itImage.goLeft();
+				auxMirrorH(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+				
+
+				itThis.goRight();
+				itImage.goRight();
+				auxMirrorH(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+			} else {
+
+				itThis.goRight();
+				itImage.goLeft();
+				auxMirrorH(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+				
+
+				itThis.goLeft();
+				itImage.goRight();
+				auxMirrorH(itThis, itImage, profondeur + 1);
+				itThis.goUp();
+				itImage.goUp();
+			}
+		}
 	}
 
 	/**
@@ -433,7 +501,7 @@ public class Image extends AbstractImage {
 	            	maxH = medianeH;
 	                it.goLeft();
 	            } else {
-	            	minH = medianeH + 1;
+	            	minH = medianeH;
 	                it.goRight();
 	            }
 	        } else { //profondeur paire on divise les x (découpage verticale)
@@ -442,7 +510,7 @@ public class Image extends AbstractImage {
 	            	maxW = medianeW;
 	                it.goLeft();
 	            } else {
-	            	minW = medianeW + 1;
+	            	minW = medianeW;
 	                it.goRight();
 	            }
 	        }
@@ -474,12 +542,44 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public boolean sameLeaf(int x1, int y1, int x2, int y2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
-		return false;
+		int profondeur = 0;
+	    int minH = 0;
+	    int maxH = 256;
+	    int minW = 0;
+	    int maxW = 256;
+
+
+	    Iterator<Node> it = this.iterator();
+	    
+	    while (it.getValue() == Node.TWO) {
+	    	if (profondeur % 2 == 0) {
+	    		int midH = (minH + maxH) / 2;
+	    		if (y1 < midH) {
+	    			maxH = midH;
+	    			it.goLeft();
+	    		} else {
+	    			minH = midH;
+	    			it.goRight();
+	    		}
+	    	} else {
+	    		int midW = (minW + maxW) / 2;
+	    		if (x1 < midW) {
+	    			maxW = midW;
+	    			it.goLeft();
+	    		} else {
+	    			minW = midW;
+	    			it.goRight();
+	    		}
+	    	}
+	    	profondeur++;
+	    }
+		return minW <= x2 && x2 < maxW && minH <= y2 && y2 < maxH;
+		/**
+		 * J'ai pas fait strictement inférieur au niveau des max car j'ai choisi 
+		 * 256 comme valeur max et il n'est pas inclu dans les valeurs possibles
+		 * De plus si on fait les ( / 2) les parties inférieurs sont bornés par
+		 * les valeurs impaire inclus (par exemple 0 à 127 et non 0 à 128)
+		 */
 	}
 
 	/**
