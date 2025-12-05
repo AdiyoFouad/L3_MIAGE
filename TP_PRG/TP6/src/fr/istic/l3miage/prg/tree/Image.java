@@ -230,11 +230,17 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void zoomIn(AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
+		Iterator<Node> it = this.iterator();
+		it.clear();
+		Iterator<Node> itImage = image2.iterator();
+		
+		if (itImage.getValue() == Node.TWO) {
+			itImage.goLeft();
+		}
+		if (itImage.getValue() == Node.TWO) {
+			itImage.goLeft();
+		}
+		affectAux(it, itImage);
 	}
 
 	/**
@@ -246,11 +252,130 @@ public class Image extends AbstractImage {
 	 */
 	@Override
 	public void zoomOut(AbstractImage image2) {
-		System.out.println();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Fonction a ecrire");
-		System.out.println("-------------------------------------------------");
-		System.out.println();
+		Iterator<Node> it = this.iterator();
+		Iterator<Node> itImage = image2.iterator();
+
+		it.clear();
+
+		it.addValue(Node.TWO);
+		it.goRight();
+		it.addValue(Node.ZERO);
+		it.goUp();
+		it.goLeft();
+		it.addValue(Node.TWO);
+		
+		
+		it.goRight();
+		it.addValue(Node.ZERO);
+		it.goUp();
+
+		it.goLeft();
+		
+		auxZoomOut(it, itImage, 0);
+
+		/**
+		 * notre auxZoomOut notre it à Node.ZERO 
+		 * c"est à dire la compression donne un noir
+		 * dans ce cas toute l'image est noir alors
+		 */
+		if(it.getValue() == Node.ZERO) {
+			it.goRoot();
+			it.clear();
+			it.addValue(Node.ZERO);
+		}
+		
+	}
+	
+	public void auxZoomOut(Iterator<Node> itThis, Iterator<Node> itImage, int profondeur) {
+
+		if (profondeur < 14) {
+			
+			itThis.addValue(itImage.getValue());
+			if(itImage.getValue() == Node.TWO) {
+				
+				itThis.goLeft();
+				itImage.goLeft();
+				auxZoomOut(itThis, itImage, profondeur + 1);
+				Node resultatG = itThis.getValue();
+				itImage.goUp();
+				itThis.goUp();
+				
+				itThis.goRight();
+				itImage.goRight();
+				auxZoomOut(itThis, itImage, profondeur + 1);
+				Node resultatD = itThis.getValue();
+				itImage.goUp();
+				itThis.goUp();	
+				
+				if (resultatG == resultatD && resultatG != Node.TWO) {
+					itThis.goLeft();
+					itThis.remove();
+					itThis.goUp();
+					itThis.remove();
+				}
+
+			}
+			
+		} else {
+			if(itImage.getValue() != Node.TWO) {
+				itThis.addValue(itImage.getValue());
+			} else {
+				calcul(itThis, itImage);
+			}		
+			
+		}
+		
+		
+		
+		
+	}
+	
+	public void calcul(Iterator<Node> itThis, Iterator<Node> itImage) {
+
+		Node current = itImage.getValue();
+
+		//itThis.addValue(current);
+		
+		if (current == Node.TWO) {
+			int nbreNoir = 0;
+			int nbreBlanc = 0;
+			
+			itImage.goLeft();
+			if (itImage.getValue() == Node.ZERO) {
+				nbreNoir += 2;
+			} else if (itImage.getValue() == Node.ONE) {
+				nbreBlanc += 2;
+			} else {
+				nbreBlanc++;
+				nbreNoir++;
+			}
+			itImage.goUp();
+			
+			itImage.goRight();
+			if (itImage.getValue() == Node.ZERO) {
+				nbreNoir += 2;
+			} else if (itImage.getValue() == Node.ONE) {
+				nbreBlanc += 2;
+			} else {
+				nbreBlanc++;
+				nbreNoir++;
+			}
+			itImage.goUp();
+			
+			if( nbreNoir > nbreBlanc) {
+				itThis.addValue(Node.ZERO);
+			} else {
+				itThis.addValue(Node.ONE);
+			}
+			
+			
+			//System.out.println(itThis.getValue());
+
+			
+		}
+		
+		
+		
 	}
 
 	/**
