@@ -22,33 +22,40 @@ public class Fourmis {
 
 		for (int i = 0; i < s.length(); i++) {
 			curs = s.charAt(i);
-			if (i == s.length() - 1) {
-				// dernier élement et unique
-				suite.append(compteur);
-				suite.append(curs);
-			} else if (i == s.length() - 2 && curs == s.charAt(i + 1)) {
-				// avant dernier et dernier élement élément sont égaux
-				suite.append(compteur + 1);
-				suite.append(curs);
-				i++; // je passe le cas du dernier élément puisque déjà traité
-			} else if (i == s.length() - 2 && curs != s.charAt(i + 1)) {
-				// avant dernier et dernier élement élément sont différents
-				suite.append(compteur);
-				suite.append(curs);
-				suite.append(1);
-				suite.append(s.charAt(i + 1));
-				i++; // je passe le cas du dernier élément puisque déjà traité
+			if (i < s.length() - 1 && curs == s.charAt(i + 1)) {
+				compteur++;
 			} else {
-				// Cas où nous ne sommes pas sur les deux derniers numéros
-				suiv = s.charAt(i + 1);
-				if (curs == suiv) {
-					compteur++;
-				} else {
-					suite.append(compteur);
-					suite.append(curs);
-					compteur = 1;
-				}
+				suite.append(compteur);
+				suite.append(curs);
+				compteur = 1;
 			}
+//			if (i == s.length() - 1) {
+//				// dernier élement et unique
+//				suite.append(compteur);
+//				suite.append(curs);
+//			} else if (i == s.length() - 2 && curs == s.charAt(i + 1)) {
+//				// avant dernier et dernier élement élément sont égaux
+//				suite.append(compteur + 1);
+//				suite.append(curs);
+//				i++; // je passe le cas du dernier élément puisque déjà traité
+//			} else if (i == s.length() - 2 && curs != s.charAt(i + 1)) {
+//				// avant dernier et dernier élement élément sont différents
+//				suite.append(compteur);
+//				suite.append(curs);
+//				suite.append(1);
+//				suite.append(s.charAt(i + 1));
+//				i++; // je passe le cas du dernier élément puisque déjà traité
+//			} else {
+//				// Cas où nous ne sommes pas sur les deux derniers numéros
+//				suiv = s.charAt(i + 1);
+//				if (curs == suiv) {
+//					compteur++;
+//				} else {
+//					suite.append(compteur);
+//					suite.append(curs);
+//					compteur = 1;
+//				}
+//			}
 		}
 		return suite.toString();
 	}

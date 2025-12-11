@@ -8,9 +8,9 @@ import fr.istic.l3miage.prg.tree_util.NodeType;
 import java.util.ArrayDeque;
 
 /**
- * @author Mickaël Foursov <foursov@univ-rennes1.fr>
+ * @author ODJOUOYE Fouad <fouad.odjouoye@etudiant.univ-rennes1.fr>
  * @version 4.0
- * @since 2015-06-15
+ * @since 2025-12-03
  * @param <T>
  *            type formel d'objet pour la classe
  *

@@ -230,7 +230,7 @@ public class MySet extends List<SubSet> {
 		
 		
 		Iterator<SubSet> it = this.iterator();
-		Iterator<SubSet> it2 = set2.copyOf().iterator();
+		Iterator<SubSet> it2 = set2.iterator();
 		//tu peux vérifier en faisant this == set2
 		//copyOf car si on passe l'object lui meme à la fonction it2 et it pointe
 		// vers le même truc ce qui fait que testDifference7 ne passe pas sans ça
@@ -267,7 +267,7 @@ public class MySet extends List<SubSet> {
 	 */
 	public void symmetricDifference(MySet set2) {
 		Iterator<SubSet> it = this.iterator();
-		Iterator<SubSet> it2 = set2.copyOf().iterator();
+		Iterator<SubSet> it2 = set2.iterator();
 		//copyOf car si on passe l'object lui meme à la fonction it2 et it pointe
 		// vers le même truc ce qui fait que testDifference7 ne passe pas sans ça
 		
