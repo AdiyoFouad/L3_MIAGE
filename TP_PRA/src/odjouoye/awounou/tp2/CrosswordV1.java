@@ -8,17 +8,17 @@ package odjouoye.awounou.tp2;
 * vertical
 */
 
-public class CrosswordV1<T> {
+public class CrosswordV1 {
 	/**
 	* Constructeur créant une instance de Crossword
 	* dotée de 4 instances de Grid, suivant les
 	* spécifications données ci-dessous
 	*/
 	
-	private Grid<T> solution;
-	private Grid<T> proposition;
-	private Grid<T> horizontal;
-	private Grid<T>  vertical;
+	private Grid<Character> solution;
+	private Grid<Character> proposition;
+	private Grid<String> horizontal;
+	private Grid<String>  vertical;
 	
 	public CrosswordV1 (int height, int width) {
 		solution = new Grid<>(height, width);
@@ -65,7 +65,7 @@ public class CrosswordV1<T> {
 		if (black) {
 			this.solution.setCell(row, column, null);
 		} else {
-			this.solution.setCell(row, column, (T)" ");
+			this.solution.setCell(row, column, ' ');
 		}
 	}
 	
@@ -73,28 +73,28 @@ public class CrosswordV1<T> {
 	* @return la solution dans la case (row, column)
 	* @pre correctCoords(row, column) && !isBlackSquare(row, column)
 	*/
-	public T getSolution(int row, int column) {
+	public Character getSolution(int row, int column) {
 		if (isBlackSquare(row, column)) {
 			throw new RuntimeException();
 		}
 		return this.solution.getCell(row, column);
 	}
 
-	public void setSolution(int row, int column, T solution) {
+	public void setSolution(int row, int column, Character solution) {
 		if (isBlackSquare(row, column)) {
 			throw new RuntimeException();
 		}
 		this.solution.setCell(row, column, solution);
 	}
 	
-	public T getProposition(int row, int column) {
+	public Character getProposition(int row, int column) {
 		if (isBlackSquare(row, column)) {
 			throw new RuntimeException();
 		}
 		return this.proposition.getCell(row, column);
 	}
 	
-	public void setProposition(int row, int column, T prop) {
+	public void setProposition(int row, int column, Character prop) {
 		if (isBlackSquare(row, column)) {
 			throw new RuntimeException();
 		}
@@ -106,7 +106,7 @@ public class CrosswordV1<T> {
 	* si horizontal, et la définition verticale sinon
 	* @pre correctCoords(row, column) && !isBlackSquare(row, column)
 	*/
-	public T getDefinition(int row, int column,boolean horizontal) {
+	public String getDefinition(int row, int column,boolean horizontal) {
 		if (isBlackSquare(row, column)) {
 			throw new RuntimeException();
 		}
@@ -116,7 +116,7 @@ public class CrosswordV1<T> {
 		return this.vertical.getCell(row, column);
 	}
 	
-	public void setDefinition(int row, int column,boolean horizontal, T definition) {
+	public void setDefinition(int row, int column,boolean horizontal, String definition) {
 
 		if (isBlackSquare(row, column)) {
 			throw new RuntimeException();
