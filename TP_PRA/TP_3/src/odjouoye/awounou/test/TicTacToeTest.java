@@ -18,11 +18,11 @@ public class TicTacToeTest {
 
 	@BeforeEach
 	public void setUp() {
-		morpions = new TicTacToeV1();
+//		morpions = new TicTacToeV1(); //x
 //		morpions = new TicTacToeV2(); //x
 //		morpions = new TicTacToeV3(); //x
 //		morpions = new TicTacToeV4(); //x
-//		morpions = new TicTacToeV5();
+		morpions = new TicTacToeV5();
 //		morpions = new TicTacToeV6(); //x
 //		morpions = new TicTacToeV7(); //x
 //		morpions = new TicTacToeV8(); //x
@@ -105,6 +105,17 @@ public class TicTacToeTest {
 		assertTrue(caseVide, "Aucun joueur ne devrait encore jouer au début de la partie");
 		assertTrue(!morpions.gameOver(), "La partie ne peut être terminée avant le premier coup");
 		
+	}
+	
+	@Test
+	public void testPremierCoup() {
+		// Scénario vérifiant le premier coup joué, notamment :
+		// * position correcte ou non
+		// * non-fin de partie
+		// * identité du premier joueur
+		morpions.play(2, 1);
+		assertTrue(morpions.getSquare(2, 1).equals(Owner.FIRST));
+		assertTrue(!morpions.gameOver(), "La partie ne peut être terminée après le premier coup");
 	}
 	
 	@Test
@@ -210,6 +221,101 @@ public class TicTacToeTest {
 		morpions.play(1, 2);
 		morpions.play(2, 2);
 		assertTrue(morpions.getWinner().equals(Owner.NONE) && morpions.numberOfRounds() == 9 && morpions.gameOver(), "TestGetVainqueur4 : Match nul (b)");
+		
+	}
+	
+	@Test
+	public void testPartiePasFinie() {
+		// Scénario explorant les situations de non-fin de partie,
+		// avec vérification systématique de gameOver() == false
+		
+		morpions.play(0, 2);
+		assertTrue(!morpions.gameOver());
+		
+		morpions.play(0, 1);
+		assertTrue(!morpions.gameOver());
+		
+		morpions.play(1, 0);
+		assertTrue(!morpions.gameOver());
+		
+		morpions.play(0, 0);
+		assertTrue(!morpions.gameOver());
+		
+		morpions.play(1, 1);
+		assertTrue(!morpions.gameOver());
+		
+		morpions.play(2, 0);
+		assertTrue(!morpions.gameOver());
+	}
+	
+	@Test
+	public void testControle1() {
+		// Scénario tentant divers coups non autorisés,
+		// avec vérification systématique de legalMove()
+		
+		morpions.play(0, 0);
+		assertTrue(!morpions.legalMove(0, 0), "la case (0,0) est déjà remplie");
+		
+		morpions.play(1, 1);
+		assertTrue(!morpions.legalMove(1, 1), "la case (1,1) est déjà remplie");
+		
+		morpions.play(0, 1);
+		assertTrue(!morpions.legalMove(0, 1), "la case (0,1) est déjà remplie");
+		
+		morpions.play(2, 1);
+		assertTrue(!morpions.legalMove(2, 1), "la case (2,1) est déjà remplie");
+		
+
+		assertTrue(morpions.legalMove(2, 2), "la case (2,2) n'est pas encore remplie");
+		
+		morpions.play(0, 2);
+		assertTrue(!morpions.legalMove(0, 2), "la case (0,2) est déjà remplie");
+		
+		assertTrue(!morpions.legalMove(2, 2), "Fin de partie ! On ne peut plus remplir de case");
+
+		
+	}
+	
+	@Test
+	public void testControle2() {
+		// Scénario tentant divers coups non autorisés,
+		// avec vérification systématique de legalMove()
+		
+
+		morpions.play(0, 0);
+		assertTrue(!morpions.legalMove(0, 0), "la case (0,0) est déjà remplie");
+		
+		morpions.play(1, 2);
+		assertTrue(!morpions.legalMove(1, 2), "la case (1,2) est déjà remplie");
+		
+		morpions.play(2, 1);
+		assertTrue(!morpions.legalMove(2, 1), "la case (2,1) est déjà remplie");
+		
+		morpions.play(1, 1);
+		assertTrue(!morpions.legalMove(1, 1), "la case (1,1) est déjà remplie");
+		
+		morpions.play(0, 2);
+		assertTrue(!morpions.legalMove(0, 2), "la case (0,2) est déjà remplie");
+		
+		morpions.play(2, 2);
+		assertTrue(!morpions.legalMove(2, 2), "la case (2,2) est déjà remplie");
+		
+		morpions.play(2, 0);
+		assertTrue(!morpions.legalMove(2, 0), "la case (2,0) est déjà remplie");
+		
+
+		assertTrue(morpions.legalMove(0, 1), "la case (0,1) n'est pas encore remplie");
+		
+		morpions.play(1, 0);
+		assertTrue(!morpions.legalMove(1, 0), "la case (1,0) est déjà remplie");
+		
+		
+		
+		
+
+		assertTrue(!morpions.legalMove(0, 1), "Fin de partie ! On ne peut plus remplir de case");
+		
+		
 		
 	}
 	
