@@ -18,7 +18,7 @@ public class TicTacToeTest {
 
 	@BeforeEach
 	public void setUp() {
-//		morpions = new TicTacToeV1();
+		morpions = new TicTacToeV1();
 //		morpions = new TicTacToeV2(); //x
 //		morpions = new TicTacToeV3(); //x
 //		morpions = new TicTacToeV4(); //x
@@ -28,7 +28,7 @@ public class TicTacToeTest {
 //		morpions = new TicTacToeV8(); //x
 //		morpions = new TicTacToeV9(); 
 //		morpions = new TicTacToeV10();
-		morpions = new TicTacToeV11();
+//		morpions = new TicTacToeV11();
 //		morpions = new TicTacToeV12(); //x
 
 	}
@@ -75,11 +75,14 @@ public class TicTacToeTest {
 		Owner owner = morpions.getTurn();
 
 		assertTrue(owner.equals(Owner.FIRST), "La méthode getTurn() doit retourner un Owner");
-		
 	
 		morpions.play(1, 1);
 		owner = morpions.getTurn();
-		assertTrue(owner.equals(Owner.SECOND), "Le joueur courant après le premier coup ne peut être autre que le joueur SECOND");	
+		assertTrue(owner.equals(Owner.SECOND), "Le joueur courant après le premier coup ne peut être autre que le joueur SECOND");
+		
+		morpions.nextPlayer();
+		owner = morpions.getTurn();
+		assertTrue(owner.equals(Owner.FIRST), "");
 	}
 	
 	@Test
@@ -100,6 +103,7 @@ public class TicTacToeTest {
 			}
 		}
 		assertTrue(caseVide, "Aucun joueur ne devrait encore jouer au début de la partie");
+		assertTrue(!morpions.gameOver(), "La partie ne peut être terminée avant le premier coup");
 		
 	}
 	
@@ -208,6 +212,7 @@ public class TicTacToeTest {
 		assertTrue(morpions.getWinner().equals(Owner.NONE) && morpions.numberOfRounds() == 9 && morpions.gameOver(), "TestGetVainqueur4 : Match nul (b)");
 		
 	}
+	
 	
 	
 	
