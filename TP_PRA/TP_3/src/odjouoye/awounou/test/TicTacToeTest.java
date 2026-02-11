@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.istic.l3miage.pra.morpion.*;
+import odjouoye.awounou.TicTacToe;
 
 public class TicTacToeTest {
 	AbstractTicTacToe morpions;
@@ -20,6 +21,7 @@ public class TicTacToeTest {
 
 	@BeforeEach
 	public void setUp() {
+		morpions = new TicTacToe(); //x
 //		morpions = new TicTacToeV1(); //x
 //		morpions = new TicTacToeV2(); //x
 //		morpions = new TicTacToeV3(); //x
@@ -28,7 +30,7 @@ public class TicTacToeTest {
 //		morpions = new TicTacToeV6(); //x
 //		morpions = new TicTacToeV7(); //x
 //		morpions = new TicTacToeV8(); //x
-		morpions = new TicTacToeV9(); 
+//		morpions = new TicTacToeV9(); 
 //		morpions = new TicTacToeV10(); //x
 //		morpions = new TicTacToeV11(); //x
 //		morpions = new TicTacToeV12(); //x
