@@ -6,10 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 // import odjouoye.awounou.tp1.Crossword;
-import odjouoye.awounou.tp2.CrosswordV2;
+import odjouoye.awounou.tp2.Crossword;
 
 public class TestCrossword {
-	private CrosswordV2 mc;
+	private Crossword mc;
 	private int hauteur;
 	private int largeur;
 	private boolean[][] noire;
@@ -22,7 +22,7 @@ public class TestCrossword {
 	public void setUp() throws Exception {
 		hauteur = 321;
 		largeur = 654;
-		mc = new CrosswordV2(hauteur, largeur);
+		mc = new Crossword(hauteur, largeur);
 		System.out.println("Test de " + mc.getClass().getName());
 		noire = new boolean[hauteur][largeur];
 		solution = new Character[hauteur][largeur];
@@ -52,7 +52,7 @@ public class TestCrossword {
 		fill();
 
 		// Création d'une 2ème instance pour tester d'ventuels effets de bord
-		CrosswordV2 mc2 = new CrosswordV2(3, 4);
+		Crossword mc2 = new Crossword(3, 4);
 		for (int lig = 0; lig < mc2.getHeight(); lig++) {
 			for (int col = 0; col < mc2.getWidth(); col++) {
 				mc2.setBlackSquare(lig, col, false);

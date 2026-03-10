@@ -1,7 +1,7 @@
 package odjouoye.awounou.tp2;
 
 
-public class CrosswordV2 extends Grid<CrosswordSquare>{
+public class Crossword extends Grid<CrosswordSquare>{
 	/**
 	* Constructeur créant une instance de Crossword
 	* dotée de 4 instances de Grid, suivant les
@@ -10,7 +10,7 @@ public class CrosswordV2 extends Grid<CrosswordSquare>{
 
 
 	
-	public CrosswordV2 (int height, int width) {
+	public Crossword (int height, int width) {
 		super(height,width);
 		for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

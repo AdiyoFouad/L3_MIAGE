@@ -21,8 +21,8 @@ public class TicTacToeTest {
 
 	@BeforeEach
 	public void setUp() {
-		morpions = new TicTacToe(); //x
-//		morpions = new TicTacToeV1(); //x
+//		morpions = new TicTacToe(); //x
+		morpions = new TicTacToeV1(); //x
 //		morpions = new TicTacToeV2(); //x
 //		morpions = new TicTacToeV3(); //x
 //		morpions = new TicTacToeV4(); //x
