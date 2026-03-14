@@ -1,0 +1,17 @@
+.tictactoesquare {
+    -fx-background-color: linear-gradient(red, blue,0.08);
+    -fx-border-color: black;
+    -fx-border-width: 2;
+	-fx-pref-width: 80px;
+	-fx-pref-height: 80px;
+	-fx-font-size: 24px;
+	-fx-alignment: center
+}
+
+.hover-valid {
+	-fx-background-color: lightgreen;
+}
+
+.hover-invalid {
+	-fx-background-color: red;
+}

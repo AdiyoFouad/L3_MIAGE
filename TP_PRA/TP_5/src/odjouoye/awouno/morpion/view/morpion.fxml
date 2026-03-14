@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<?import odjouoye.awouno.morpion.model.TicTacToeSquare?>
+
+<GridPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="odjouoye.awouno.morpion.controller.Controller" alignment="center">
+	 <!-- Ligne 0 -->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="0" column="0" GridPane.rowIndex="0" GridPane.columnIndex="0"/>-->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="0" column="1" GridPane.rowIndex="0" GridPane.columnIndex="1"/>-->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="0" column="2" GridPane.rowIndex="0" GridPane.columnIndex="2"/>-->
+
+<!--     Ligne 1 -->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="1" column="0" GridPane.rowIndex="1" GridPane.columnIndex="0"/>-->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="1" column="1" GridPane.rowIndex="1" GridPane.columnIndex="1"/>-->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="1" column="2" GridPane.rowIndex="1" GridPane.columnIndex="2"/>-->
+
+<!--     Ligne 2 -->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="2" column="0" GridPane.rowIndex="2" GridPane.columnIndex="0"/>-->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="2" column="1" GridPane.rowIndex="2" GridPane.columnIndex="1"/>-->
+<!--    <TicTacToeSquare styleClass="tictactoesquare" row="2" column="2" GridPane.rowIndex="2" GridPane.columnIndex="2"/>-->
+
+
+</GridPane>
