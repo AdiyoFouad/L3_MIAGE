@@ -7,21 +7,19 @@
 
 <?import odjouoye.awouno.morpion.model.TicTacToeSquare?>
 
-<GridPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="odjouoye.awouno.morpion.controller.Controller" alignment="center">
-	 <!-- Ligne 0 -->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="0" column="0" GridPane.rowIndex="0" GridPane.columnIndex="0"/>-->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="0" column="1" GridPane.rowIndex="0" GridPane.columnIndex="1"/>-->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="0" column="2" GridPane.rowIndex="0" GridPane.columnIndex="2"/>-->
-
-<!--     Ligne 1 -->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="1" column="0" GridPane.rowIndex="1" GridPane.columnIndex="0"/>-->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="1" column="1" GridPane.rowIndex="1" GridPane.columnIndex="1"/>-->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="1" column="2" GridPane.rowIndex="1" GridPane.columnIndex="2"/>-->
-
-<!--     Ligne 2 -->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="2" column="0" GridPane.rowIndex="2" GridPane.columnIndex="0"/>-->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="2" column="1" GridPane.rowIndex="2" GridPane.columnIndex="1"/>-->
-<!--    <TicTacToeSquare styleClass="tictactoesquare" row="2" column="2" GridPane.rowIndex="2" GridPane.columnIndex="2"/>-->
-
-
-</GridPane>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="odjouoye.awouno.morpion.controller.Controller" spacing="10" alignment="CENTER">
+	
+	<GridPane fx:id="morpion" gridLinesVisible="true" alignment="CENTER"></GridPane>
+    
+    <Button fx:id="restartButton" text="Restart" onAction="#restartGame"/>
+    
+    <HBox spacing="20" alignment="CENTER">
+        <Label fx:id="labelX" />
+        <Label fx:id="labelO" />
+        <Label fx:id="labelFree" />
+    </HBox>
+    
+    <HBox spacing="20" alignment="CENTER">
+        <Label fx:id="gameOverLabel" />
+    </HBox>
+</VBox>

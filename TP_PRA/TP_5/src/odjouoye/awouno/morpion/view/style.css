@@ -1,10 +1,8 @@
 .tictactoesquare {
-    -fx-background-color: linear-gradient(red, blue,0.08);
+    -fx-background-color: lightgray;
     -fx-border-color: black;
-    -fx-border-width: 2;
 	-fx-pref-width: 80px;
 	-fx-pref-height: 80px;
-	-fx-font-size: 24px;
 	-fx-alignment: center
 }
 
@@ -14,4 +12,17 @@
 
 .hover-invalid {
 	-fx-background-color: red;
+}
+
+#labelX, #labelO {
+	-fx-background-radius: 4;
+	-fx-border-radius: 4;
+	-fx-border-color: #CC3333;
+	-fx-border-width: 1;
+	-fx-padding: 2 4 2 4;
+	-fx-text-fill: white; 
+}
+
+#gameOverLabel {
+	-fx-font-size: 1.5em;
 }

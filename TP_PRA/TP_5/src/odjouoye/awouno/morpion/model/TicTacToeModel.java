@@ -80,8 +80,9 @@ public class TicTacToeModel {
 				winningBoard[i][j].set(false);
 			}
 		}
-		nbreCoups.set(0);
 		winner.set(Owner.NONE);
+		turn.set(Owner.FIRST);
+		nbreCoups.set(0);
 	}
 
 	/**
@@ -112,11 +113,19 @@ public class TicTacToeModel {
 	 * @return résultat du jeu sous forme de StringExpression
 	 */
 	public final StringExpression getEndOfGameMessage() {
-		return Bindings.createStringBinding(() -> getMessage(), gameOver());
+		/**
+		 * binding également sur nbreCoups car en cas de partie nul winner ne change pas
+		 * nbreCoups seul suffira pas car dans le play j'incrémente nbreCoups avant de
+		 * calculer le gagnant
+		 */
+		return Bindings.createStringBinding(() -> getMessage(), nbreCoups, winner);
 	}
 
 	private final String getMessage() {
 		String msg;
+		if (!gameOver().get()) {
+			return "";
+		}
 		if (winner.get() == Owner.FIRST) {
 			msg = "Game over! Le gagnant est le premier joueur";
 		} else if (winner.get() == Owner.SECOND) {
@@ -147,15 +156,15 @@ public class TicTacToeModel {
 			return;
 		}
 
-		nbreCoups.set(nbreCoups.get() + 1);
+		// nbreCoups.set(nbreCoups.get() + 1);
 		(board[row][column]).set(turn.get());
 		nextPlayer();
 
-		if (nbreCoups.get() < 5) {
-			return;
+		if (nbreCoups.get() + 1 >= 5) { // Vérifie si au moins 5 coups ont été joués avant de checker
+			checkWinner();
 		}
 
-		checkWinner();
+		nbreCoups.set(nbreCoups.get() + 1); // Incrémente après le check
 
 	}
 
@@ -256,6 +265,10 @@ public class TicTacToeModel {
 	public BooleanBinding gameOver() {
 		return Bindings.createBooleanBinding(() -> !winner.get().equals(Owner.NONE) || nbreCoups.get() == 9, nbreCoups,
 				winner);
+	}
+
+	public IntegerProperty nbreCoupsProperty() {
+		return nbreCoups;
 	}
 
 	/**

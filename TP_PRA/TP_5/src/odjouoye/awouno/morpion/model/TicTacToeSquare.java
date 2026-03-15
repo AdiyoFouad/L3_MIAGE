@@ -33,7 +33,7 @@ public class TicTacToeSquare extends Label {
 		}, ownerProperty));
 
 		this.fontProperty().bind(Bindings.createObjectBinding(() -> {
-			return winnerProperty.get() ? new Font("System", 30) : new Font("System", 20);
+			return winnerProperty.get() ? new Font("System", 50) : new Font("System", 30);
 		}, winnerProperty));
 
 	}
