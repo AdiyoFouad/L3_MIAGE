@@ -1,7 +1,8 @@
 package odjouoye.awouno.crossword.model;
 
-public class CrosswordSquare {
+import javafx.scene.control.Label;
 
+public class CrosswordSquare extends Label{
 	
 	private char solution;
 	private char proposition;

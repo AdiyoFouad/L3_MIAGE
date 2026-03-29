@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="odjouoye.awouno.morpion.controller.Controller">
+   <center>
+      <VBox fx:id="mainVBox" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <!-- Menu pour choisir grille -->
+            <HBox fx:id="menuHBox" alignment="CENTER_LEFT" spacing="10.0">
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button fx:id="loadGridBtn" text="Charger grille aléatoire" />
+                  <Label fx:id="statusLabel" text="Grille non chargée" />
+               </children>
+            </HBox>
+            
+            <!-- Zone grille + indices -->
+            <HBox fx:id="gameHBox" spacing="20.0" alignment="CENTER">
+               <children>
+                  <!-- Grille des mots croisés (remplie en Java) -->
+                  <BorderPane fx:id="gridContainer" style="-fx-border-color: black; -fx-border-width: 2;">
+                     <center>
+                        <GridPane fx:id="crosswordGrid" hgap="1.0" vgap="1.0" />
+                     </center>
+                  </BorderPane>
+                  
+                  <!-- Panneau indices et contrôles -->
+                  <VBox fx:id="controlsVBox" spacing="15.0" prefWidth="300.0">
+                     <Label text="Indices Horizontaux" style="-fx-font-weight: bold;" />
+                     <ListView fx:id="horizontalCluesList" prefHeight="200.0" />
+                     
+                     <Label text="Indices Verticaux" style="-fx-font-weight: bold;" />
+                     <ListView fx:id="verticalCluesList" prefHeight="200.0" />
+                     
+                     <!-- Boutons de contrôle -->
+                     <VBox spacing="5.0">
+                        <HBox alignment="CENTER" spacing="5.0">
+                           <Button fx:id="leftBtn" text="&lt;" prefWidth="40.0" />
+                           <Button fx:id="rightBtn" text="&gt;" prefWidth="40.0" />
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="5.0">
+                           <Button fx:id="upBtn" text="&uarr;" prefWidth="40.0" />
+                           <Button fx:id="downBtn" text="&darr;" prefWidth="40.0" />
+                        </HBox>
+                        <Button fx:id="enterBtn" text="Entrée" />
+                        <Button fx:id="backspaceBtn" text="Effacer" />
+                     </VBox>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" spacing="10.0">
+         <padding><Insets bottom="10.0" left="20.0" right="20.0" top="10.0" /></padding>
+         <children>
+            <Button fx:id="printSolutionBtn" text="Afficher solution" />
+            <Button fx:id="closeBtn" text="Fermer (Ctrl+W)" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
+

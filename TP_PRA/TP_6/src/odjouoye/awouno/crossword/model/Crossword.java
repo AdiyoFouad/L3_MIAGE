@@ -3,6 +3,7 @@ package odjouoye.awouno.crossword.model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 public class Crossword extends Grid<CrosswordSquare>{
 	/**
@@ -22,6 +23,8 @@ public class Crossword extends Grid<CrosswordSquare>{
                 this.setCell(i, j,  new CrosswordSquare());
             }
         }
+	    horizontalClues = FXCollections.observableArrayList();
+	    verticalClues = FXCollections.observableArrayList();
 	}
 	
 
@@ -98,10 +101,10 @@ public class Crossword extends Grid<CrosswordSquare>{
 			throw new RuntimeException();
 		}
 		if (horizontal) {
-			this.getCell(row, column).setHorizontal(definition);;
+			this.getCell(row, column).setHorizontal(definition);
 			return;
 		}
-		this.getCell(row, column).setVertical(definition);;
+		this.getCell(row, column).setVertical(definition);
 	}
 
 
@@ -120,6 +123,26 @@ public class Crossword extends Grid<CrosswordSquare>{
 	
 	public void printSolution() {
 		
+	}
+	
+	private void generateClues() {
+	    horizontalClues = FXCollections.observableArrayList();
+	    verticalClues = FXCollections.observableArrayList();
+	    
+	    // Génère les indices depuis les définitions des cases
+	    for (int i = 0; i < getHeight(); i++) {
+	        for (int j = 0; j < getWidth(); j++) {
+	            CrosswordSquare square = getCell(i, j);
+	            if (!square.isBlack()) {
+	                if (square.getHorizontal() != null && !square.getHorizontal().trim().isEmpty()) {
+	                    horizontalClues.add(new Clue(square.getHorizontal(), i, j, true));
+	                }
+	                if (square.getVertical() != null && !square.getVertical().trim().isEmpty()) {
+	                    verticalClues.add(new Clue(square.getVertical(), i, j, false));
+	                }
+	            }
+	        }
+	    }
 	}
 
 

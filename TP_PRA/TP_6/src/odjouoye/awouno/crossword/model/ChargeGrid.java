@@ -15,6 +15,7 @@ public class ChargeGrid {
 	}
 
 	public static Connection connecterBD() throws SQLException {
+		
 
 		Connection connect;
 		String url = "jdbc:mysql://localhost:3306/crossword";
@@ -159,7 +160,7 @@ public class ChargeGrid {
 		System.out.println("Total : " + grilles.size() + " grille(s) chargée(s) avec succès.");
 	}
 
-	private static void afficherApercu(Crossword cw) {
+	public static void afficherApercu(Crossword cw) {
 		int h = cw.getHeight();
 		int w = cw.getWidth();
 
