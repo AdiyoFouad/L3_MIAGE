@@ -6,11 +6,22 @@
 <?import javafx.scene.shape.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="odjouoye.awouno.crossword.controller.CrosswordController" >
+	<top>
+        <HBox>
+            <Button fx:id="loadBtn" text="Nouvelle grille aléatoire"/>
+        </HBox>
+    </top>
 	<center>
-		<VBox fx:id="mainVBox" spacing="20.0" BorderPane.alignment="CENTER">
+		<HBox fx:id="mainVBox" spacing="20.0" alignment="CENTER">
 <!--        	<Button fx:id="loadGridBtn" text="Charger grille aléatoire" />-->
         	<GridPane fx:id="crosswordGrid" gridLinesVisible="true" alignment="CENTER"></GridPane>
-        </VBox>
+        	<VBox>
+		        <Label text="Indices horizontaux"/>
+		        <ListView fx:id="horizontalList"/>
+		        <Label text="Indices verticaux"/>
+		        <ListView fx:id="verticalList"/>
+		    </VBox>
+        </HBox>
     </center>
 </BorderPane>
 

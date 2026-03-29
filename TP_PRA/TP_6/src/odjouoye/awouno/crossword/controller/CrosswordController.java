@@ -5,11 +5,13 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import odjouoye.awouno.crossword.model.ChargeGrid;
+import odjouoye.awouno.crossword.model.Clue;
 import odjouoye.awouno.crossword.model.Crossword;
 import odjouoye.awouno.crossword.model.CrosswordSquare;
 
@@ -28,12 +30,40 @@ public class CrosswordController {
 	GridPane crosswordGrid;
 
 	@FXML
+	ListView<Clue> horizontalList;
+	
+	@FXML
+	ListView<Clue> verticalList;
+
+	@FXML
 	public void initialize() {
 
 		loadGrid();
 
 		Platform.runLater(() -> {
 			crosswordGrid.getScene().setOnKeyPressed(ev -> handleKeyPress(ev));
+			
+			// Focus permanent sur grille pour que les touches directionnelles 
+			// ne soit pas pris en compte au niveau des ListView
+			crosswordGrid.requestFocus();
+			crosswordGrid.focusedProperty().addListener((obs, old, newFocus) -> {
+		        if (!newFocus) crosswordGrid.requestFocus();
+		    });
+		});
+		
+		horizontalList.setOnMouseClicked(e -> {
+		    Clue clue = horizontalList.getSelectionModel().getSelectedItem();
+		    if (clue != null) {
+		        horizontalDirection = true;
+		        selectCell(clue.getRow(), clue.getColumn());
+		    }
+		});
+		verticalList.setOnMouseClicked(e -> {
+		    Clue clue = verticalList.getSelectionModel().getSelectedItem();
+		    if (clue != null) {
+		        horizontalDirection = false;
+		        selectCell(clue.getRow(), clue.getColumn());
+		    }
 		});
 
 	}
@@ -50,6 +80,13 @@ public class CrosswordController {
 				crosswordGrid.add(square, col, row);
 			}
 		}
+		
+		horizontalList.setItems(crossword.getHorizontalClues());
+		verticalList.setItems(crossword.getVerticalClues());
+		
+
+		// direction horizontal par défaut
+    	horizontalList.getStyleClass().add("current-direction");
 	}
 
 	private void configureSquare(CrosswordSquare square, int row, int col) {
@@ -63,7 +100,6 @@ public class CrosswordController {
 		}
 
 		square.getStyleClass().add("white-square");
-		// updateSquareText(square);
 
 		square.setOnMouseClicked(e -> selectCell(row, col));
 
@@ -74,15 +110,8 @@ public class CrosswordController {
 		});
 	}
 
-	private void updateCurrentCell(int row, int col) {
-		currentRow = row;
-		currentCol = col;
-		currentSquare = crossword.getCell(row, col);
-		// updateSquareFocus();
-	}
-
 	private void selectCell(int row, int col) {
-		if (crossword == null || crossword.isBlackSquare(row, col)) {
+		if (crossword.isBlackSquare(row, col)) {
 			return;
 		}
 
@@ -95,9 +124,68 @@ public class CrosswordController {
 		currentSquare = crossword.getCell(row, col);
 
 		currentSquare.getStyleClass().add("current-square");
+		
+		selectIndice();
+	}
+	
+	private void selectIndice() {
 
-		// updateSelectedClues();
-		// crosswordGrid.requestFocus();
+	    horizontalList.getSelectionModel().clearSelection();
+	    verticalList.getSelectionModel().clearSelection();
+	    
+		Clue hClue = findHorizontalClue(currentRow, currentCol);
+	    Clue vClue = findVerticalClue(currentRow, currentCol);
+	    
+	    
+	    if (hClue != null) {
+	    	horizontalList.getSelectionModel().select(hClue);
+	    	horizontalList.scrollTo(hClue);
+	    }
+	    if (vClue != null) {
+	    	verticalList.getSelectionModel().select(vClue);
+	        verticalList.scrollTo(vClue);
+	    }
+	    
+	    // On nettoie tout d'abord
+	    horizontalList.getStyleClass().remove("current-direction");
+	    verticalList.getStyleClass().remove("current-direction");
+	    
+	    if (horizontalDirection) {
+	    	horizontalList.getStyleClass().add("current-direction");
+	    } else {
+	    	verticalList.getStyleClass().add("current-direction");
+	    }
+	}
+	
+	private Clue findHorizontalClue(int row, int col) {
+	    int debutCol = col;
+	    // le mot commence forcément à l'indice 0 ou juste après une case noire
+	    while (debutCol > 0 && !crossword.isBlackSquare(row, debutCol - 1)) {
+	        debutCol--;
+	    }
+	    
+	    // Cherche l'indice qui commence exactement là
+	    for (Clue clue : crossword.getHorizontalClues()) {
+	        if (clue.getRow() == row && clue.getColumn() == debutCol) {
+	            return clue;
+	        }
+	    }
+	    return null;
+	}
+
+	private Clue findVerticalClue(int row, int col) {
+	    int debutRow = row;
+	    while (debutRow > 0 && !crossword.isBlackSquare(debutRow - 1, col)) {
+	        debutRow--;
+	    }
+	    
+	    // Cherche l'indice qui commence exactement là
+	    for (Clue clue : crossword.getVerticalClues()) {
+	        if (clue.getRow() == debutRow && clue.getColumn() == col) {
+	            return clue;
+	        }
+	    }
+	    return null;
 	}
 
 	private void playLetterAnimation(CrosswordSquare square) {
@@ -110,8 +198,6 @@ public class CrosswordController {
 	}
 
 	private void handleKeyPress(KeyEvent event) {
-		if (crossword == null || currentSquare == null || currentSquare.isBlack())
-			return;
 		KeyCode code = event.getCode();
 		switch (code) {
 		case ENTER: {
@@ -159,6 +245,11 @@ public class CrosswordController {
 			break;
 		}
 		default: {
+			if (event.isControlDown() && code == KeyCode.W) {
+	            Platform.exit();
+	            event.consume();
+	            return;
+	        }
 			if (code.isLetterKey()) {
 				if (crossword.isBlackSquare(currentRow, currentCol)) {
 					return;
@@ -171,6 +262,8 @@ public class CrosswordController {
 	}
 
 	private void insertLetter(char letter) {
+		if (currentSquare == null)
+			return;
 		crossword.setProposition(currentRow, currentCol, letter);
 		currentSquare.setText(String.valueOf(letter));
 		playLetterAnimation(currentSquare);
@@ -178,10 +271,12 @@ public class CrosswordController {
 	}
 
 	private void moveForward() {
+		// on déplace vers la gauche ou le bas
 		move(horizontalDirection ? 0 : 1, horizontalDirection ? 1 : 0);
 	}
 
 	private void moveBackward() {
+		// on déplace vers la droite ou le haut
 		move(horizontalDirection ? 0 : -1, horizontalDirection ? -1 : 0);
 	}
 
@@ -199,6 +294,7 @@ public class CrosswordController {
 		// sans bouger le currentSquare
 		if (horizontalDirection != newHorizontalDirection) {
 			horizontalDirection = newHorizontalDirection;
+			selectIndice();
 			return;
 		}
 		if (forward) {

@@ -25,6 +25,7 @@ public class Crossword extends Grid<CrosswordSquare>{
         }
 	    horizontalClues = FXCollections.observableArrayList();
 	    verticalClues = FXCollections.observableArrayList();
+	    
 	}
 	
 
@@ -125,9 +126,7 @@ public class Crossword extends Grid<CrosswordSquare>{
 		
 	}
 	
-	private void generateClues() {
-	    horizontalClues = FXCollections.observableArrayList();
-	    verticalClues = FXCollections.observableArrayList();
+	public void generateClues() {
 	    
 	    // Génère les indices depuis les définitions des cases
 	    for (int i = 0; i < getHeight(); i++) {

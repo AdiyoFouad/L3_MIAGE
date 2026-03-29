@@ -103,6 +103,7 @@ public class ChargeGrid {
 				}
 			}
 
+			cw.generateClues();
 			return cw;
 
 		} catch (SQLException e) {

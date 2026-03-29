@@ -23,3 +23,12 @@
 .correct-square {
     -fx-background-color: lightgreen;
 }
+
+#horizontalList, #verticalList{
+	-fx-pref-height : 200px;
+}
+
+.current-direction .list-cell:selected{
+	-fx-background-color: red;
+	-fx-font-weight: bold;
+}
