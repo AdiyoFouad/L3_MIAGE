@@ -18,8 +18,11 @@ public class ChargeGrid {
 		
 
 		Connection connect;
-		String url = "jdbc:mysql://localhost:3306/crossword";
-		connect = DriverManager.getConnection(url, "root", "");
+//		String url = "jdbc:mysql://localhost:3306/crossword";
+//		connect = DriverManager.getConnection(url, "root", "");
+		
+		String url = "jdbc:mysql://mysql.istic.univ-rennes1.fr:3306/base_fodjouoye";
+		connect = DriverManager.getConnection(url, "user_fodjouoye", "Adiyo2002");
 		return connect;
 	}
 

@@ -5,21 +5,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="odjouoye.awouno.crossword.controller.CrosswordController" >
+<BorderPane fx:id="main" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="odjouoye.awouno.crossword.controller.CrosswordController" >
 	<top>
-        <HBox>
-            <Button fx:id="loadBtn" text="Nouvelle grille aléatoire"/>
-        </HBox>
+        <HBox spacing="10" alignment="CENTER">
+		    <ComboBox fx:id="gridCombo" prefWidth="250" promptText="Choisir une autre grille..."/>
+		    <Button fx:id="loadBtn" text="Charger aléatoirement" onAction="#loadRandomGrid"/>
+		</HBox>
     </top>
 	<center>
-		<HBox fx:id="mainVBox" spacing="20.0" alignment="CENTER">
+		<HBox fx:id="mainHBox" spacing="20" alignment="CENTER">
 <!--        	<Button fx:id="loadGridBtn" text="Charger grille aléatoire" />-->
         	<GridPane fx:id="crosswordGrid" gridLinesVisible="true" alignment="CENTER"></GridPane>
-        	<VBox>
-		        <Label text="Indices horizontaux"/>
-		        <ListView fx:id="horizontalList"/>
-		        <Label text="Indices verticaux"/>
-		        <ListView fx:id="verticalList"/>
+        	<VBox spacing="10" alignment="CENTER">
+		        <VBox>
+			        <Label text="Indices horizontaux"/>
+			        <ListView fx:id="horizontalList"/>
+		        </VBox>
+		        <VBox>
+			        <Label text="Indices verticaux"/>
+			        <ListView fx:id="verticalList"/>
+		        </VBox>
 		    </VBox>
         </HBox>
     </center>

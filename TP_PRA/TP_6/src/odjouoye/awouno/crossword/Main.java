@@ -14,6 +14,8 @@ public class Main extends Application {
 		stage.setTitle("Crossword");
 		//stage.setResizable(false);
 		stage.setScene(scene);
+		stage.setMinWidth(950);
+	    stage.setMinHeight(650);
 		stage.show();
 	}
 

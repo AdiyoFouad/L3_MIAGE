@@ -1,9 +1,15 @@
 package odjouoye.awouno.crossword.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
@@ -17,7 +23,7 @@ import odjouoye.awouno.crossword.model.CrosswordSquare;
 
 public class CrosswordController {
 
-	private int partie = 1;
+	private int partie = 0;
 	private ChargeGrid db = new ChargeGrid();
 	private Crossword crossword;
 	private CrosswordSquare currentSquare;
@@ -27,16 +33,38 @@ public class CrosswordController {
 	private int currentRow;
 
 	@FXML
-	GridPane crosswordGrid;
+	private GridPane crosswordGrid;
 
 	@FXML
-	ListView<Clue> horizontalList;
+	private ListView<Clue> horizontalList;
 	
 	@FXML
-	ListView<Clue> verticalList;
+	private ListView<Clue> verticalList;
+	
+	@FXML 
+	private ComboBox<String> gridCombo; // Pour menu déroulant - affiche les noms
+	private Map<Integer, String> allGrilles;
+	private Map<String, Integer> nomToId; // permettra de trouverle id correspondant au nom de la partie
 
 	@FXML
 	public void initialize() {
+		
+		allGrilles = db.availableGrids();
+	    nomToId = new HashMap<>();
+	    
+	    // Remplissage avec les noms
+	    for (Map.Entry<Integer, String> entry : allGrilles.entrySet()) {
+	        String nom = entry.getValue();
+	        Integer id = entry.getKey();
+	        nomToId.put(nom, id);
+	        gridCombo.getItems().add(nom);
+	    }
+	    
+	    // Grille par défaut
+	    if (!allGrilles.isEmpty()) {
+	        String nomDefaut = allGrilles.get(partie);
+	        gridCombo.setValue(nomDefaut);
+	    }
 
 		loadGrid();
 
@@ -65,10 +93,25 @@ public class CrosswordController {
 		        selectCell(clue.getRow(), clue.getColumn());
 		    }
 		});
+		
+		// Sélection par nom
+		gridCombo.valueProperty().addListener((obs, oldNom, nouveauNom) -> {
+		    if (nouveauNom != null && nomToId.containsKey(nouveauNom)) {
+		        partie = nomToId.get(nouveauNom);
+		        reloadGrid();
+		    }
+		});
 
 	}
+	
+	
 
-	public void loadGrid() {
+	private void loadGrid() {
+		if (crossword != null) {
+			// Vider la grille en cas de rechargement
+			crosswordGrid.getChildren().clear();
+		}
+		partie = partie != 0 ? partie : 1;
 		crossword = db.extractGrid(partie);
 		
 		db.afficherApercu(crossword);
@@ -86,9 +129,40 @@ public class CrosswordController {
 		
 
 		// direction horizontal par défaut
-    	horizontalList.getStyleClass().add("current-direction");
+//		horizontalDirection = true;
+//    	horizontalList.getStyleClass().add("current-direction");
 	}
+	
+	
 
+	@FXML
+	private void loadRandomGrid() {
+	    if (allGrilles.isEmpty()) return;
+	    
+	    List<Integer> ids = new ArrayList<>(allGrilles.keySet());
+	    partie = ids.get((int)(Math.random() * ids.size()));
+	    
+	    String nomAleatoire = allGrilles.get(partie);
+	    gridCombo.setValue(nomAleatoire); // Affiche nom !
+	    
+	    reloadGrid();
+	}
+	
+	private void reloadGrid() {
+	    crosswordGrid.getChildren().clear();
+	    loadGrid();
+	    
+	    // Remet curseur
+//	    for (int r = 0; r < crossword.getHeight(); r++) {
+//	        for (int c = 0; c < crossword.getWidth(); c++) {
+//	            if (!crossword.isBlackSquare(r, c)) {
+//	                selectCell(r, c);
+//	                return;
+//	            }
+//	        }
+//	    }
+	}
+	
 	private void configureSquare(CrosswordSquare square, int row, int col) {
 		square.getStyleClass().clear();
 		square.getStyleClass().add("crossword-square");
@@ -130,6 +204,11 @@ public class CrosswordController {
 	
 	private void selectIndice() {
 
+	    
+	    // On nettoie tout d'abord
+	    horizontalList.getStyleClass().remove("current-direction");
+	    verticalList.getStyleClass().remove("current-direction");
+
 	    horizontalList.getSelectionModel().clearSelection();
 	    verticalList.getSelectionModel().clearSelection();
 	    
@@ -145,10 +224,6 @@ public class CrosswordController {
 	    	verticalList.getSelectionModel().select(vClue);
 	        verticalList.scrollTo(vClue);
 	    }
-	    
-	    // On nettoie tout d'abord
-	    horizontalList.getStyleClass().remove("current-direction");
-	    verticalList.getStyleClass().remove("current-direction");
 	    
 	    if (horizontalDirection) {
 	    	horizontalList.getStyleClass().add("current-direction");
